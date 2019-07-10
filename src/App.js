@@ -7,9 +7,12 @@ class App extends React.Component {
         super();
         this.state = {
             isLoading: true,
-            data: []
+            data: [],
+            selectedFile: null
         }
         this.getChecked = this.getChecked.bind(this);
+        this.onChangeHandler = this.onChangeHandler.bind(this);
+        this.onClickHandler = this.onClickHandler.bind(this);
     }
 
     getChecked() {
@@ -60,11 +63,47 @@ class App extends React.Component {
         this.getData();
     }
 
+    onChangeHandler(e) {
+        console.log(e.target.files);
+        this.setState({
+            selectedFile: e.target.files
+        })
+    }
+
+    onClickHandler(e) {
+        var {data} = this.state;
+        console.log(this.state.data);
+        var data = new FormData();
+        for (let i = 0; i < this.state.selectedFile.length; i++) {
+            data.append('file', this.state.selectedFile[i]);
+        }
+        Axios.post("http://localhost:3000/upload", data, {
+        })
+        .then(res => { // then print response status
+            console.log(res.statusText);
+            Axios.get('http://localhost:3000/images')
+            .then(res => {
+                this.setState({data: res.data});
+                console.log(this.state.data);
+                console.log(res.data);
+            })
+          })
+          //console.log(data);
+    }
+
+
     render() {
         const {isLoading, data} = this.state;
         //console.log(this.state);
         return (
             <div>
+            <div>
+                <form>
+                    <label>Upload your files here</label>
+                    <input type="file" multiple onChange={this.onChangeHandler} />
+                </form>
+                <button onClick={this.onClickHandler}>Upload some files</button>
+            </div>
                {
                    isLoading ? <div>Loading....</div> :
                    <div>
