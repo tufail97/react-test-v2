@@ -16,7 +16,8 @@ class App extends React.Component {
     }
 
     getChecked() {
-        var {data} = this.state;
+        var {data, isLoading} = this.state;
+        this.setState({isLoading: true});
         console.log(this.state.data);
         var imageCheckboxes = document.querySelectorAll('.imageCheckboxes');
         var checkedVals = [];
@@ -41,7 +42,7 @@ class App extends React.Component {
                 }
             }
         }
-        this.setState({data: stateCopy});
+        this.setState({data: stateCopy, isLoading: false});
         console.log(this.state.data);
     }
 
@@ -71,7 +72,8 @@ class App extends React.Component {
     }
 
     onClickHandler(e) {
-        var {data} = this.state;
+        var {data, isLoading} = this.state;
+        this.setState({isLoading: true});
         console.log(this.state.data);
         var data = new FormData();
         for (let i = 0; i < this.state.selectedFile.length; i++) {
@@ -79,22 +81,17 @@ class App extends React.Component {
         }
         Axios.post("http://localhost:3000/upload", data, {
         })
-        .then(res => { // then print response status
-            console.log(res.statusText);
+        .then(res => {
             Axios.get('http://localhost:3000/images')
             .then(res => {
-                this.setState({data: res.data});
-                console.log(this.state.data);
-                console.log(res.data);
+                this.setState({data: res.data, isLoading: false});
             })
           })
-          //console.log(data);
     }
 
 
     render() {
         const {isLoading, data} = this.state;
-        //console.log(this.state);
         return (
             <div>
             <div>
