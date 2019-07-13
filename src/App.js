@@ -10,23 +10,16 @@ class App extends React.Component {
             data: [],
             selectedFile: null
         }
-        this.getChecked = this.getChecked.bind(this);
+        this.removeChecked = this.removeChecked.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onClickHandler = this.onClickHandler.bind(this);
     }
 
-    getChecked() {
+    removeChecked(valArray) {
         var {data, isLoading} = this.state;
         this.setState({isLoading: true});
         console.log(this.state.data);
-        var imageCheckboxes = document.querySelectorAll('.imageCheckboxes');
-        var checkedVals = [];
-        imageCheckboxes.forEach(function(checkbox) {
-          if (checkbox.checked) {
-            checkedVals.push({imageId: checkbox.value});
-          }
-        })
-        Axios.post("http://localhost:3000/deleteimage", checkedVals, {
+        Axios.post("http://localhost:3000/deleteimage", valArray, {
         })
         .then(res => {
         })
@@ -34,9 +27,9 @@ class App extends React.Component {
           console.log(error);
         });
         var stateCopy = this.state.data;
-        for (var j = 0; j < checkedVals.length; j++) {
+        for (var j = 0; j < valArray.length; j++) {
             for (var i = 0; i < stateCopy.length; i++) {
-                if (stateCopy[i].imagePath === checkedVals[j].imageId) {
+                if (stateCopy[i].imagePath === valArray[j].imageId) {
                     stateCopy.splice(i,1);
                     break;
                 }
@@ -94,17 +87,49 @@ class App extends React.Component {
         const {isLoading, data} = this.state;
         return (
             <div>
-            <div>
-                <form>
-                    <label>Upload your files here</label>
-                    <input type="file" multiple onChange={this.onChangeHandler} />
-                </form>
-                <button onClick={this.onClickHandler}>Upload some files</button>
+                <div>
+                    <form>
+                        <label>Upload your files here</label>
+                        <input type="file" multiple onChange={this.onChangeHandler} />
+                    </form>
+                    <button onClick={this.onClickHandler}>Upload some files</button>
+                </div>
+                <ThumbnailRender data={this.state.data} isLoading={this.state.isLoading} remove={this.removeChecked}/>
             </div>
-               {
-                   isLoading ? <div>Loading....</div> :
+        )
+    }
+}
+
+class ThumbnailRender extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            checkBoxes: null
+        }
+        this.getChecked = this.getChecked.bind(this);
+    }
+
+    getChecked() {
+        var imageCheckboxes = document.querySelectorAll('.imageCheckboxes');
+        var checkedVals = [];
+        imageCheckboxes.forEach(function(checkbox) {
+          if (checkbox.checked) {
+            checkedVals.push({imageId: checkbox.value});
+          }
+        })
+        this.setState({checkBoxes: checkedVals})
+        console.log(checkedVals);
+        console.log(this.state);
+        this.props.remove(checkedVals);
+    }
+
+    render() {
+        return (
+            <div>
+                {
+                   this.props.isLoading ? <div>Loading....</div> :
                    <div>
-                   {data.map(function(x) {
+                   {this.props.data.map(function(x) {
                        return (
                            <div key={x._id}>
                                <img key ={x._id + "a"} style={{width:200, height:200}} src={`http://localhost:3000/${x.imagePath}`} />
@@ -112,14 +137,27 @@ class App extends React.Component {
                            </div>
                        )
                    })}
-                   <button onClick={this.getChecked}>Remove elements</button>
                    </div>
                }
+               <ElementDeleteButton getCheckBoxes={this.getChecked}/>
             </div>
         )
     }
 }
 
+class ElementDeleteButton extends React.Component {
+    constructor() {
+        super();
+    }
+
+    render() {
+        return (
+            <div>
+                <button onClick={this.props.getCheckBoxes}>Remove elements</button>
+            </div>
+        )
+    }
+}
 
 
 
