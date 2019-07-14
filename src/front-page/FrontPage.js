@@ -1,15 +1,51 @@
 import React from 'react';
-import "./FrontPageStyles.css"
+import Axios from 'axios';
+import "./FrontPageStyles.css";
 
 export default class FrontPage extends React.Component {
     constructor() {
         super();
+        this.state = {
+            isLoading : true,
+            images : null
+        }
+    }
+
+    getData() {
+        Axios.get('http://localhost:3000/images')
+        .then(res => {
+            var objArray = res.data;
+            this.setState({
+                images: objArray,
+                isLoading: false
+            });
+        })
+        .catch(error => this.setState({ error, isLoading: false }));
+    }
+
+    componentWillMount() {
+        this.getData();
     }
 
     render () {
+        const {isLoading, images} = this.state;
         return (
             <div>
-                This is my front page working
+                {
+                isLoading ? <div>Loading...</div> :
+                <div id="glitchImagesContainer">
+                    {
+                        images.map(function(x) {
+                            return (
+                                <img 
+                                key={x._id} 
+                                className="glitchImages" 
+                                src={`http://localhost:3000/${x.imagePath}`} />
+                            )
+                        })
+                    }
+                </div>
+                }
             </div>
         )
     }

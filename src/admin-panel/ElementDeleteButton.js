@@ -8,7 +8,10 @@ export default class ElementDeleteButton extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.props.getCheckBoxes}>Remove elements</button>
+                <button 
+                onClick={this.props.getCheckBoxes}>
+                Remove elements
+                </button>
             </div>
         )
     }

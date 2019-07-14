@@ -44,7 +44,6 @@ export default class AdminPanel extends React.Component {
         Axios.get('http://localhost:3000/images')
         .then(res => {
             var objArray = res.data;
-            console.log('looooooaddddded');
             this.setState({
                 data: objArray,
                 isLoading: false
@@ -87,14 +86,23 @@ export default class AdminPanel extends React.Component {
         const {isLoading, data} = this.state;
         return (
             <div>
-                   <div>
+                <div>
                     <form>
                         <label>Upload your files here</label>
-                        <input type="file" multiple onChange={this.onChangeHandler} />
+                        <input 
+                        type="file" 
+                        multiple 
+                        onChange={this.onChangeHandler} />
                     </form>
-                    <button onClick={this.onClickHandler}>Upload some files</button>
+                    <button 
+                    onClick={this.onClickHandler}>
+                    Upload some files
+                    </button>
                 </div>
-                <ThumbnailRender data={this.state.data} isLoading={this.state.isLoading} remove={this.removeChecked}/>
+                <ThumbnailRender 
+                data={this.state.data} 
+                isLoading={this.state.isLoading} 
+                remove={this.removeChecked}/>
             </div>
         )
     }
