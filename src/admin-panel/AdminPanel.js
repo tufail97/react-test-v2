@@ -57,28 +57,35 @@ export default class AdminPanel extends React.Component {
     }
 
     onChangeHandler(e) {
-        console.log(e.target.files);
         this.setState({
             selectedFile: e.target.files
         })
     }
 
+   
+
     onClickHandler(e) {
-        var {data, isLoading} = this.state;
-        this.setState({isLoading: true});
-        console.log(this.state.data);
-        var data = new FormData();
-        for (let i = 0; i < this.state.selectedFile.length; i++) {
-            data.append('file', this.state.selectedFile[i]);
-        }
-        Axios.post("http://localhost:3000/upload", data, {
-        })
-        .then(res => {
-            Axios.get('http://localhost:3000/images')
-            .then(res => {
-                this.setState({data: res.data, isLoading: false});
+        if (this.state.selectedFile) {
+            var {data, isLoading} = this.state;
+            this.setState({isLoading: true});
+            console.log(this.state.data);
+            var data = new FormData();
+            for (let i = 0; i < this.state.selectedFile.length; i++) {
+                data.append('file', this.state.selectedFile[i]);
+            }
+            Axios.post("http://localhost:3000/upload", data, {
             })
-          })
+            .then(res => {
+                Axios.get('http://localhost:3000/images')
+                .then(res => {
+                    this.setState({data: res.data, isLoading: false});
+                })
+              })
+            document.querySelector('.fileInput').value = null;
+            this.setState({selectedFile: null});
+        } else {
+            console.log('insert error warning');
+        }
     }
 
 
@@ -90,6 +97,7 @@ export default class AdminPanel extends React.Component {
                     <form>
                         <label>Upload your files here</label>
                         <input 
+                        className="fileInput"
                         type="file" 
                         multiple 
                         onChange={this.onChangeHandler} />
