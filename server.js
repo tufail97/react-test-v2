@@ -1,3 +1,4 @@
+require('rootpath')();
 var express = require('express');
 var app = express();
 var multer = require('multer');
@@ -6,10 +7,17 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var fs = require('fs');
 
+const jwt = require('_helpers/jwt');
+const errorHandler = require('_helpers/error-handler');
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use("/public", express.static(path.join(__dirname, 'public')));
+
+app.use(jwt()); // use JWT auth to secure the api
+app.use(errorHandler); //global error handler
+app.use('/users', require('./users/users.controller'));
 
 //for use locally
 var dbName = 'my-database';

@@ -2,13 +2,19 @@ import React from 'react';
 import Axios from "axios";
 import ThumbnailRender from "./ThumbnailRender.js";
 
+import { history } from '../_helpers/history.js';
+import { authenticationService } from '../_services/authentication.service.js';
+import { userService } from "../_services/user.service.js";
+
 export default class AdminPanel extends React.Component {
     constructor() {
         super();
         this.state = {
             isLoading: true,
             data: [],
-            selectedFile: null
+            selectedFile: null,
+            currentUser: authenticationService.currentUserValue,
+            users: null
         }
         this.removeChecked = this.removeChecked.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -16,11 +22,13 @@ export default class AdminPanel extends React.Component {
     }
 
     removeChecked(valArray) {
+        var headerInfo = {
+            headers: {'Authorization': "bearer " + this.state.currentUser.token}
+        }
         var {data, isLoading} = this.state;
         this.setState({isLoading: true});
         console.log(this.state.data);
-        Axios.post("http://localhost:3000/deleteimage", valArray, {
-        })
+        Axios.post("http://localhost:3000/deleteimage", valArray, headerInfo)
         .then(res => {
         })
         .catch(function (error) {
@@ -56,25 +64,37 @@ export default class AdminPanel extends React.Component {
         this.getData();
     }
 
+    componentDidMount() {
+        userService.getAll().then(users => this.setState({ users }));
+        authenticationService.currentUser.subscribe(x => this.setState({ currentUser: x }));
+    }
+
+    logout() {
+        authenticationService.logout();
+        history.push('/login');
+    }
+
     onChangeHandler(e) {
         this.setState({
             selectedFile: e.target.files
         })
     }
 
-   
-
     onClickHandler(e) {
+        var headerInfo = {
+            headers: {'Authorization': "bearer " + this.state.currentUser.token}
+        }
+        console.log(this.state.currentUser);
         if (this.state.selectedFile) {
-            var {data, isLoading} = this.state;
+            var {data, isLoading, currentUser, users} = this.state;
             this.setState({isLoading: true});
             console.log(this.state.data);
             var data = new FormData();
             for (let i = 0; i < this.state.selectedFile.length; i++) {
                 data.append('file', this.state.selectedFile[i]);
             }
-            Axios.post("http://localhost:3000/upload", data, {
-            })
+            Axios.post("http://localhost:3000/upload", data, headerInfo
+            )
             .then(res => {
                 Axios.get('http://localhost:3000/images')
                 .then(res => {
@@ -93,6 +113,7 @@ export default class AdminPanel extends React.Component {
         const {isLoading, data} = this.state;
         return (
             <div>
+                <a onClick={this.logout} >Logout</a>
                 <div>
                     <form>
                         <label>Upload your files here</label>
