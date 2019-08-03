@@ -19,10 +19,16 @@ app.use(jwt()); // use JWT auth to secure the api
 app.use(errorHandler); //global error handler
 app.use('/users', require('./users/users.controller'));
 
-//for use locally
-var dbName = 'my-database';
+//start app listening///////////
+
+app.listen(3000, function() {
+  console.log('App running on port 3000');
+});
+
+////////////////////////////////
 
 //CONNECT TO DB
+var dbName = 'my-database';
 var MongoClient = require('mongodb').MongoClient;
 ObjectId = require('mongodb').ObjectId
 var db;
@@ -91,17 +97,6 @@ app.get('/images', (req, res) => {
     })
   });
   
-//start app listening
-app.listen(3000, function() {
-    console.log('App running on port 3000');
-});
-
-fs.watch('./public/uploads/', (eventType) => {
-  console.log(`event type is: ${eventType}`);
-});
-
-
-////////////////////////////////
 
 //DELETE IMAGES
 app.post('/deleteimage', function(req,res) {
