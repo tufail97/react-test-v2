@@ -111,9 +111,11 @@ export default class AdminPanel extends React.Component {
 
     render() {
         const {isLoading, data} = this.state;
+        console.log(this.state.currentUser.username);
         return (
             <div>
-                <a onClick={this.logout} >Logout</a>
+                <div>You are logged in as {this.state.currentUser.username}!</div>
+                <button onClick={this.logout}>Logout</button>
                 <div>
                     <form>
                         <label>Upload your files here</label>
