@@ -1,18 +1,12 @@
-var express = require('express');
-var router = express.Router();
 var fs = require('fs');
 
-
-//DELETE IMAGES
-router.post('/remove', remove);
+module.exports = { remove };
 
 function remove(req,res) {
     //get the imageId from the checked items when form is posted
     req.setTimeout(0);
     var fileToDelete = req.body;
     console.log(fileToDelete);
-  
-    //console.log(fileToDelete);
     //if there is only one entry, call functions.
     if (typeof fileToDelete === 'string') {
       console.log('this is a string')
@@ -29,7 +23,6 @@ function remove(req,res) {
       })
     }
   };
-  
   
   //function to delete image locally using path
   function deleteLocalPath(collectionName, queryParam) {
@@ -60,5 +53,3 @@ function remove(req,res) {
       }
     })
   }
-
-  module.exports = router;

@@ -16,15 +16,7 @@ app.use("/public", express.static(path.join(__dirname, 'public')));
 app.use(jwt()); // use JWT auth to secure the api
 app.use(errorHandler); //global error handler
 app.use('/users', require('./back-end/users/users.controller'));
-
-var retreive = require('back-end/images/retreive.js');
-app.use('/images', retreive);
-
-var upload = require('back-end/images/upload.js');
-app.use('/images', upload);
-
-var remove = require('back-end/images/remove.js');
-app.use('/images', remove);
+app.use('/images', require('./back-end/images/images.controller'));
 
 //start app listening///////////
 app.listen(3000, function() {

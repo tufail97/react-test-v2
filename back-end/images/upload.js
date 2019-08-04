@@ -1,7 +1,4 @@
-var express = require('express');
-var router = express.Router();
 var multer = require('multer');
-var fileInfo;
 
 //Set Storage
 var storage = multer.diskStorage({
@@ -15,13 +12,10 @@ var storage = multer.diskStorage({
 
 var uploadFile = multer({ storage: storage }).array('file');
 
-//Upload files
-router.post('/upload', upload);
-
 function upload(req, res) {
     uploadFile(req, res, function (err) {
 
-        fileInfo = req.files;
+        var fileInfo = req.files;
         var fileInfoArray = [];
         fileInfo.map(function(file) {
             fileObject = {
@@ -47,5 +41,4 @@ function upload(req, res) {
     })
 };
 
-
-module.exports = router;
+module.exports = { upload };
