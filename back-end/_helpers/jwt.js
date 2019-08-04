@@ -9,9 +9,7 @@ function jwt() {
         path: [
             // public routes that don't require authentication
             '/users/authenticate',
-            '/images'
+            '/images',
         ]
     });
 }
-
-//need to protect '/upload' and '/deleteimage'
