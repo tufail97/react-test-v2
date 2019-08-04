@@ -12,7 +12,7 @@ export default class MainImageRender extends React.Component {
     }
 
     getData() {
-        Axios.get("http://localhost:3000/images")
+        Axios.get("http://localhost:3000/images/retreive")
         .then(res => {
             var objArray = res.data;
             this.setState({

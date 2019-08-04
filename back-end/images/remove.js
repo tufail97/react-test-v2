@@ -4,9 +4,9 @@ var fs = require('fs');
 
 
 //DELETE IMAGES
-router.post('/', deleteImages);
+router.post('/remove', remove);
 
-function deleteImages(req,res) {
+function remove(req,res) {
     //get the imageId from the checked items when form is posted
     req.setTimeout(0);
     var fileToDelete = req.body;

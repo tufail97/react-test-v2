@@ -17,14 +17,14 @@ app.use(jwt()); // use JWT auth to secure the api
 app.use(errorHandler); //global error handler
 app.use('/users', require('./back-end/users/users.controller'));
 
-var images = require('back-end/images/images.js');
-app.use('/images', images);
+var retreive = require('back-end/images/retreive.js');
+app.use('/images', retreive);
 
 var upload = require('back-end/images/upload.js');
-app.use('/upload', upload);
+app.use('/images', upload);
 
-var deleteImage = require('back-end/images/deleteImage.js');
-app.use('/deleteImage', deleteImage);
+var remove = require('back-end/images/remove.js');
+app.use('/images', remove);
 
 //start app listening///////////
 app.listen(3000, function() {

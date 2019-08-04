@@ -28,7 +28,7 @@ export default class AdminPanel extends React.Component {
         var {data, isLoading} = this.state;
         this.setState({isLoading: true});
         console.log(this.state.data);
-        Axios.post("http://localhost:3000/deleteimage", valArray, headerInfo)
+        Axios.post("http://localhost:3000/images/remove", valArray, headerInfo)
         .then(res => {
         })
         .catch(function (error) {
@@ -49,7 +49,7 @@ export default class AdminPanel extends React.Component {
 
 
      getData() {
-        Axios.get('http://localhost:3000/images')
+        Axios.get('http://localhost:3000/images/retreive')
         .then(res => {
             var objArray = res.data;
             this.setState({
@@ -93,10 +93,10 @@ export default class AdminPanel extends React.Component {
             for (let i = 0; i < this.state.selectedFile.length; i++) {
                 data.append('file', this.state.selectedFile[i]);
             }
-            Axios.post("http://localhost:3000/upload", data, headerInfo
+            Axios.post("http://localhost:3000/images/upload", data, headerInfo
             )
             .then(res => {
-                Axios.get('http://localhost:3000/images')
+                Axios.get('http://localhost:3000/images/retreive')
                 .then(res => {
                     this.setState({data: res.data, isLoading: false});
                 })

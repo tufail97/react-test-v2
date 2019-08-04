@@ -15,10 +15,10 @@ MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }, func
   });
   
 
-router.get('/', retreiveImages);
+router.get('/retreive', retreive);
 
 //Push all info in db to endpoint
-function retreiveImages(req, res) {
+function retreive(req, res) {
     db.collection('photos').find().toArray((err, result) => {
     //make array of objects containing all info in each document 
     console.log(result);

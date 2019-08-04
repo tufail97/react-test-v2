@@ -13,13 +13,13 @@ var storage = multer.diskStorage({
   }
 })
 
-var upload = multer({ storage: storage }).array('file');
+var uploadFile = multer({ storage: storage }).array('file');
 
 //Upload files
-router.post('/', uploadImages);
+router.post('/upload', upload);
 
-function uploadImages(req, res) {
-    upload(req, res, function (err) {
+function upload(req, res) {
+    uploadFile(req, res, function (err) {
 
         fileInfo = req.files;
         var fileInfoArray = [];
