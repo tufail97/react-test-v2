@@ -42,7 +42,6 @@ export default class LoginPage extends React.Component {
         this.setState({
             isSubmitting: true
         })
-        console.log(this.state);
     }
 
     auth(user,pass) {
@@ -64,7 +63,6 @@ export default class LoginPage extends React.Component {
     }
 
     render () {
-        console.log(this.state);
         return (
            <div>
                <form onSubmit={this.handleSubmit}>

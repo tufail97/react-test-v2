@@ -60,11 +60,8 @@ export default class AdminPanel extends React.Component {
         .catch(error => this.setState({ error, isLoading: false }));
     }
 
-    componentWillMount() {
-        this.getData();
-    }
-
     componentDidMount() {
+        this.getData();
         userService.getAll().then(users => this.setState({ users }));
         authenticationService.currentUser.subscribe(x => this.setState({ currentUser: x }));
     }
@@ -111,7 +108,6 @@ export default class AdminPanel extends React.Component {
 
     render() {
         const {isLoading, data} = this.state;
-        console.log(this.state.currentUser.username);
         return (
             <div>
                 <div>You are logged in as {this.state.currentUser.username}!</div>
