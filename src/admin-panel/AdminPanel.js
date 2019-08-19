@@ -1,6 +1,8 @@
 import React from 'react';
 import Axios from "axios";
 import ThumbnailRender from "./ThumbnailRender.js";
+import PreviewRender from "./PreviewRender.js";
+import "./AdminPanelStyles.css";
 
 import { history } from '../_helpers/history.js';
 import { authenticationService } from '../_services/authentication.service.js';
@@ -14,11 +16,13 @@ export default class AdminPanel extends React.Component {
             data: [],
             selectedFile: null,
             currentUser: authenticationService.currentUserValue,
-            users: null
+            users: null,
+            previewImages: null
         }
         this.removeChecked = this.removeChecked.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onClickHandler = this.onClickHandler.bind(this);
+        this.getBase = this.getBase.bind(this);
     }
 
     removeChecked(valArray) {
@@ -75,7 +79,31 @@ export default class AdminPanel extends React.Component {
         this.setState({
             selectedFile: e.target.files
         })
+        var files = e.target.files;
+        console.log(files.length);
+        var previewImagesArray = [];
+        for (var i = 0; i < files.length; i++) {
+            this.getBase(files[i],previewImagesArray, files.length);
+        }
     }
+
+    getBase(file, previewArray, targetLength) {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.addEventListener('load', (e) => {
+            var targetFile = e.target.result;
+            previewArray.push(targetFile);
+           if (previewArray.length === targetLength) {
+               console.log('preview images done');
+               console.log(previewArray);
+               this.setState({previewImages: previewArray});
+               console.log(this.state);
+           } else {
+               console.log('preview images not done');
+           }
+        })
+    }
+
 
     onClickHandler(e) {
         var headerInfo = {
@@ -99,7 +127,10 @@ export default class AdminPanel extends React.Component {
                 })
               })
             document.querySelector('.fileInput').value = null;
-            this.setState({selectedFile: null});
+            this.setState({
+                selectedFile: null,
+                previewImages: null
+            });
         } else {
             console.log('insert error warning');
         }
@@ -108,19 +139,23 @@ export default class AdminPanel extends React.Component {
 
     render() {
         const {isLoading, data} = this.state;
+        //console.log(this.state);
         return (
             <div>
                 <div>You are logged in as {this.state.currentUser.username}!</div>
                 <button onClick={this.logout}>Logout</button>
                 <div>
                     <form>
-                        <label>Upload your files here</label>
+                        <label className="fileInputLabel" htmlFor="fileInput">Upload your files here</label>
                         <input 
+                        id="fileInput"
                         className="fileInput"
                         type="file" 
                         multiple 
                         onChange={this.onChangeHandler} />
                     </form>
+                    <PreviewRender 
+                    images={this.state.previewImages} />
                     <button 
                     onClick={this.onClickHandler}>
                     Upload some files

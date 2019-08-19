@@ -1,0 +1,22 @@
+/* Input button */
+
+#fileInput {
+    display: none;
+}
+
+.fileInputLabel {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+.previewOuter {
+    position: absolute;
+    left:350px;
+    width: 200px;
+    height: 200px;
+}
+
+.prevImage {
+    width: 100%;
+    height: 100%;
+}
