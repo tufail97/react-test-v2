@@ -20,3 +20,15 @@
     width: 100%;
     height: 100%;
 }
+
+.uploadForm {
+    margin-top: 20px;
+}
+
+.uploadButton {
+    margin: 20px 0px;
+}
+
+.removeElementsButton {
+    margin: 20px 0px;
+}

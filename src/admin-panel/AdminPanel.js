@@ -22,7 +22,8 @@ export default class AdminPanel extends React.Component {
         this.removeChecked = this.removeChecked.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onClickHandler = this.onClickHandler.bind(this);
-        this.getBase = this.getBase.bind(this);
+        this.getEncodedImage = this.getEncodedImage.bind(this);
+        this.setPreviewImages = this.setPreviewImages.bind(this);
     }
 
     removeChecked(valArray) {
@@ -79,15 +80,18 @@ export default class AdminPanel extends React.Component {
         this.setState({
             selectedFile: e.target.files
         })
-        var files = e.target.files;
-        console.log(files.length);
+        this.setPreviewImages(e.target.files);
+    }
+
+    setPreviewImages(files) {
         var previewImagesArray = [];
         for (var i = 0; i < files.length; i++) {
-            this.getBase(files[i],previewImagesArray, files.length);
+            this.getEncodedImage(files[i],previewImagesArray, files.length);
         }
     }
 
-    getBase(file, previewArray, targetLength) {
+
+    getEncodedImage(file, previewArray, targetLength) {
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.addEventListener('load', (e) => {
@@ -144,8 +148,7 @@ export default class AdminPanel extends React.Component {
             <div>
                 <div>You are logged in as {this.state.currentUser.username}!</div>
                 <button onClick={this.logout}>Logout</button>
-                <div>
-                    <form>
+                    <form className="uploadForm">
                         <label className="fileInputLabel" htmlFor="fileInput">Upload your files here</label>
                         <input 
                         id="fileInput"
@@ -157,10 +160,10 @@ export default class AdminPanel extends React.Component {
                     <PreviewRender 
                     images={this.state.previewImages} />
                     <button 
+                    className="uploadButton"
                     onClick={this.onClickHandler}>
                     Upload some files
                     </button>
-                </div>
                 <ThumbnailRender 
                 data={this.state.data} 
                 isLoading={this.state.isLoading} 

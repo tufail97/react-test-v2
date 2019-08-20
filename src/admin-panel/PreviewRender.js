@@ -10,7 +10,7 @@ export default class PreviewRender extends React.Component {
         return (
             <div className="previewOuter">
                 {
-                    !this.props.images ? <div>hello</div> : 
+                    !this.props.images ? <div>This is where images to be uploaded are displayed</div> : 
                     <div>
                         {
                             this.props.images.map(function(x,index) {

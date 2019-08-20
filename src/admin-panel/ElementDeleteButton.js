@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import "./AdminPanelStyles.css";
 
 export default class ElementDeleteButton extends React.Component {
     constructor() {
@@ -9,6 +10,7 @@ export default class ElementDeleteButton extends React.Component {
         return (
             <div>
                 <button 
+                className="removeElementsButton"
                 onClick={this.props.getCheckBoxes}>
                 Remove elements
                 </button>
