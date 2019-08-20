@@ -23,7 +23,7 @@ export default class AdminPanel extends React.Component {
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onClickHandler = this.onClickHandler.bind(this);
         this.getEncodedImage = this.getEncodedImage.bind(this);
-        this.setPreviewImages = this.setPreviewImages.bind(this);
+        this.getPreviewImages = this.getPreviewImages.bind(this);
     }
 
     removeChecked(valArray) {
@@ -80,16 +80,30 @@ export default class AdminPanel extends React.Component {
         this.setState({
             selectedFile: e.target.files
         })
-        this.setPreviewImages(e.target.files);
+        this.getPreviewImages(e.target.files);
     }
 
-    setPreviewImages(files) {
+    getPreviewImages(files) {
         var previewImagesArray = [];
         for (var i = 0; i < files.length; i++) {
+            this.getImageSize(files[0]);
+            this.getImageName(files[0]);
+            this.getImageType(files[0]);
             this.getEncodedImage(files[i],previewImagesArray, files.length);
         }
     }
 
+    getImageSize(fileInList) {
+        console.log("this is the size",fileInList.size);
+    }
+
+    getImageName(fileInList) {
+        console.log("this is the name",fileInList.name);
+    }
+
+    getImageType(fileInList) {
+        console.log("this is the type",fileInList.type);
+    }
 
     getEncodedImage(file, previewArray, targetLength) {
         var reader = new FileReader();
@@ -117,7 +131,6 @@ export default class AdminPanel extends React.Component {
             console.log(currentImage.height);
         })
     }
-
 
     onClickHandler(e) {
         var headerInfo = {
@@ -159,7 +172,7 @@ export default class AdminPanel extends React.Component {
                 <div>You are logged in as {this.state.currentUser.username}!</div>
                 <button onClick={this.logout}>Logout</button>
                     <form className="uploadForm">
-                        <label className="fileInputLabel" htmlFor="fileInput">Upload your files here</label>
+                        <label className="fileInputLabel" htmlFor="fileInput">Select your files here</label>
                         <input 
                         id="fileInput"
                         className="fileInput"
@@ -172,7 +185,7 @@ export default class AdminPanel extends React.Component {
                     <button 
                     className="uploadButton"
                     onClick={this.onClickHandler}>
-                    Upload some files
+                    Upload your files
                     </button>
                 <ThumbnailRender 
                 data={this.state.data} 
