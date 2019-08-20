@@ -68,7 +68,7 @@ body {
     margin: 20px 0px;
 }
 
-/**/
+/** Header styles **/
 
 .main-header {
     width: 100%;
@@ -78,8 +78,8 @@ body {
 
 .main-badge-container {
     position: absolute;
-    width:50%;
     height: 100%;
+    width: 60%;
     left: 3%;
 }
 
