@@ -1,5 +1,5 @@
 import React from 'react';
-import "./AdminPanelStyles.css";
+import "../styles.css";
 
 export default class ElementDeleteButton extends React.Component {
     constructor() {
