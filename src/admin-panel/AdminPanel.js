@@ -127,8 +127,8 @@ export default class AdminPanel extends React.Component {
         var currentImage = new Image();
         currentImage.src = imageSrc;
         currentImage.addEventListener('load', function(e){
-            console.log(currentImage.width);
-            console.log(currentImage.height);
+            console.log("this is the width",currentImage.width);
+            console.log("this is the height",currentImage.height);
         })
     }
 
