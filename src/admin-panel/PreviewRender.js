@@ -13,9 +13,10 @@ export default class PreviewRender extends React.Component {
                     !this.props.images ? <div>hello</div> : 
                     <div>
                         {
-                            this.props.images.map(function(x) {
+                            this.props.images.map(function(x,index) {
                                 return (
                                     <img 
+                                    key={index}
                                     className="prevImage"
                                     src={x} />
                                     )
