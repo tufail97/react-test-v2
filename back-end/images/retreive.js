@@ -15,7 +15,7 @@ MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }, func
 function retreive(req, res) {
     db.collection('photos').find().toArray((err, result) => {
     //make array of objects containing all info in each document 
-    console.log(result);
+    //console.log(result);
     const imgArray= result.map(function(result) {
       return result;
     });

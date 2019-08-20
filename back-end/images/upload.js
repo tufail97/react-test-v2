@@ -27,7 +27,7 @@ function upload(req, res) {
             fileInfoArray.push(fileObject);
             return fileInfoArray;
         })
-        console.log(fileInfoArray);
+        //console.log(fileInfoArray);
         if (err instanceof multer.MulterError) {
                return res.status(500).json(err)
            } else if (err) {
