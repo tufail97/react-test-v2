@@ -2,7 +2,6 @@ import React from 'react';
 import Axios from "axios";
 import ThumbnailRender from "./ThumbnailRender.js";
 import PreviewRender from "./PreviewRender.js";
-import "../styles.css";
 
 import { history } from '../_helpers/history.js';
 import { authenticationService } from '../_services/authentication.service.js';
