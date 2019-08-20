@@ -96,6 +96,7 @@ export default class AdminPanel extends React.Component {
         reader.readAsDataURL(file);
         reader.addEventListener('load', (e) => {
             var targetFile = e.target.result;
+            this.getImageDimensions(targetFile);
             previewArray.push(targetFile);
            if (previewArray.length === targetLength) {
                console.log('preview images done');
@@ -105,6 +106,15 @@ export default class AdminPanel extends React.Component {
            } else {
                console.log('preview images not done');
            }
+        })
+    }
+
+    getImageDimensions(imageSrc) {
+        var currentImage = new Image();
+        currentImage.src = imageSrc;
+        currentImage.addEventListener('load', function(e){
+            console.log(currentImage.width);
+            console.log(currentImage.height);
         })
     }
 
