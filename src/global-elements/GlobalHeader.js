@@ -13,15 +13,9 @@ export default class GlobalHeader extends React.Component {
     constructor() {
         super();
         this.state = {
-            loggedOn: null
+            loggedOn: currentUserSubject._value
         }
         this.logout = this.logout.bind(this);
-    }
-
-    componentDidMount() {
-        this.setState({
-            loggedOn: currentUserSubject._value
-        })
     }
 
     logout() {
@@ -33,7 +27,7 @@ export default class GlobalHeader extends React.Component {
     }
 
     render() {
-        console.log(this.state);
+        console.log(localStorage);
         return (
             <div className="main-header">
                 {this.state.loggedOn || this.props.loggedIn ?
