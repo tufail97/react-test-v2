@@ -27,7 +27,7 @@ body {
 .main-badge-container {
     position: absolute;
     height: 100%;
-    width: 60%;
+    width: 94%;
     left: 3%;
 }
 
@@ -119,6 +119,9 @@ body {
 /* Grid outer */
 
 .grid-outer {
+    position: relative;
+    width: 94%;
+    left: 3%;
     display: grid;
     grid-template-columns: 0.6fr 0.4fr;
     grid-gap: 5%;
@@ -143,6 +146,7 @@ body {
     position: absolute;
     font-weight: bold;
     font-size: 1.3em;
+    width: 94%;
     left: 3%;
     top: 50%;
     transform: translateY(-50%);
