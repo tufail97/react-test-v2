@@ -14,15 +14,26 @@ import { PrivateRoute } from './_components/index.js';
 class App extends React.Component {
     constructor() {
         super();
+        this.state = {
+            loggedIn: null
+        }
+        this.pass = this.pass.bind(this);
+    }
+
+    pass(value) {
+        this.setState({
+            loggedIn: value
+        })
     }
 
     render() {
+        console.log(this.state);
         return (
             <Router history={ history }>
             <div>
-                <GlobalHeader />
+                <GlobalHeader loggedIn={this.state.loggedIn}/>
                 <Route exact path="/" component={FrontPage}/>
-                <Route exact path="/login" component={LoginPage}/>
+                <Route exact path="/login" render={(props) => <LoginPage {...props} pass={this.pass} />} />
                 <PrivateRoute exact path="/admin"component={AdminPanel}/>
             </div>
             </Router>

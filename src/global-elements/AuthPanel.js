@@ -5,10 +5,11 @@ export default class AuthPanel extends React.Component {
         super();
     }
 
+
     render() {
         return(
             <div className="authPanel">
-                <div>You are logged in as {this.props.user ? this.props.user.username : ""}!</div>
+                <div>You are logged in as {this.props.loggedOn ? this.props.loggedOn.username : ""}</div>
                 <button onClick={this.props.logout}>Logout</button>
             </div>
         )

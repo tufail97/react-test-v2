@@ -33,6 +33,7 @@ export default class LoginPage extends React.Component {
             password: event.target.value,
             success: ''
         })
+        console.log(this.state);
     }
 
     handleSubmit(event) {
@@ -50,6 +51,7 @@ export default class LoginPage extends React.Component {
             user => {
                 const { from } = this.props.location.state || { from: { pathname: "/admin" } };
                 this.props.history.push(from);
+                this.props.pass(authenticationService.currentUser.source._value)
             },
             error => {
                 console.log(this.state);
