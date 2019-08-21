@@ -1,11 +1,14 @@
 import React from "react";
 
 export default class AuthPanel extends React.Component {
+    constructor() {
+        super();
+    }
 
     render() {
         return(
-            <div>
-                <div>You are logged in as {this.props.user.username}!</div>
+            <div className="authPanel">
+                <div>You are logged in as {this.props.user ? this.props.user.username : ""}!</div>
                 <button onClick={this.props.logout}>Logout</button>
             </div>
         )

@@ -2,7 +2,6 @@ import React from 'react';
 import Axios from "axios";
 import ThumbnailRender from "./ThumbnailRender.js";
 import PreviewRender from "./PreviewRender.js";
-import AuthPanel from "./AuthPanel.js";
 import UploadForm from "./UploadForm.js";
 import UploadButton from "./UploadButton.js";
 import BreadcrumbBanner from "./BreadcrumbBanner.js";
@@ -72,11 +71,6 @@ export default class AdminPanel extends React.Component {
         this.getData();
         userService.getAll().then(users => this.setState({ users }));
         authenticationService.currentUser.subscribe(x => this.setState({ currentUser: x }));
-    }
-
-    logout() {
-        authenticationService.logout();
-        history.push('/login');
     }
 
     onChangeHandler(e) {
@@ -170,9 +164,7 @@ export default class AdminPanel extends React.Component {
         return (
             <div>
                 <BreadcrumbBanner />
-                <AuthPanel 
-                user={this.state.currentUser}
-                logout={this.logout}/>
+
 
                 <div className="grid-outer">
                     <ThumbnailRender 

@@ -7,13 +7,14 @@ import GlobalHeader from "./global-elements/GlobalHeader.js";
 import {Route, BrowserRouter, Router} from 'react-router-dom';
 import "./styles.css";
 
-
 import { history } from './_helpers/history.js';
 import { authenticationService } from './_services/authentication.service.js';
 import { PrivateRoute } from './_components/index.js';
 
 class App extends React.Component {
-
+    constructor() {
+        super();
+    }
 
     render() {
         return (
