@@ -71,6 +71,13 @@ body {
     width: 100%;
 }
 
+/** current thumbnail styles **/
+
+.prevImage {
+    width: 100px;
+    height: 100px;
+}
+
 /** Header styles **/
 
 .main-header {
