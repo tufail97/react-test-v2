@@ -2,6 +2,9 @@ import React from 'react';
 import Axios from "axios";
 import ThumbnailRender from "./ThumbnailRender.js";
 import PreviewRender from "./PreviewRender.js";
+import AuthPanel from "./AuthPanel.js";
+import UploadForm from "./UploadForm.js";
+import UploadButton from "./UploadButton.js";
 
 import { history } from '../_helpers/history.js';
 import { authenticationService } from '../_services/authentication.service.js';
@@ -164,33 +167,25 @@ export default class AdminPanel extends React.Component {
 
 
     render() {
-        const {isLoading, data} = this.state;
-        //console.log(this.state);
         return (
             <div>
-                <div>You are logged in as {this.state.currentUser.username}!</div>
-                <button onClick={this.logout}>Logout</button>
-                        <form className="uploadForm">
-                            <label className="fileInputLabel" htmlFor="fileInput">Select your files here</label>
-                            <input 
-                            id="fileInput"
-                            className="fileInput"
-                            type="file" 
-                            multiple 
-                            onChange={this.onChangeHandler} />
-                        </form>
-                        <PreviewRender 
-                        images={this.state.previewImages} />
-                        <button 
-                        className="uploadButton"
-                        onClick={this.onClickHandler}>
-                        Upload your files
-                        </button>
-                    <ThumbnailRender 
-                    data={this.state.data} 
-                    isLoading={this.state.isLoading} 
-                    remove={this.removeChecked}/>
+                <AuthPanel 
+                user={this.state.currentUser}
+                logout={this.logout}/>
 
+                <UploadForm 
+                onChange={this.onChangeHandler}/>
+
+                <PreviewRender 
+                images={this.state.previewImages} />
+
+                <UploadButton 
+                clickHandler={this.onClickHandler} />
+  
+                <ThumbnailRender 
+                data={this.state.data} 
+                isLoading={this.state.isLoading} 
+                remove={this.removeChecked}/>
             </div>
         )
     }
