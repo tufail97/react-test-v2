@@ -124,3 +124,36 @@ body {
     grid-gap: 5%;
 }
 
+/* Breadcrumb Banner styles */
+
+.breadcrumbContainer {
+    position: relative;
+    height: 35px;
+}
+
+.breadcrumbBorder {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 1px;
+    background-color: black;
+}
+
+.breadcrumbCopyContainer {
+    position: absolute;
+    font-weight: bold;
+    font-size: 1.3em;
+    left: 3%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.breadcrumbPath {
+    display: inline-block;
+}
+
+.locationSeparator {
+    margin: 0px 7px;
+    font-size: 0.7em;
+    transform: translate(0,-0.2em);
+}

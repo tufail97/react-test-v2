@@ -5,6 +5,7 @@ import PreviewRender from "./PreviewRender.js";
 import AuthPanel from "./AuthPanel.js";
 import UploadForm from "./UploadForm.js";
 import UploadButton from "./UploadButton.js";
+import BreadcrumbBanner from "./BreadcrumbBanner.js";
 
 import { history } from '../_helpers/history.js';
 import { authenticationService } from '../_services/authentication.service.js';
@@ -168,6 +169,7 @@ export default class AdminPanel extends React.Component {
     render() {
         return (
             <div>
+                <BreadcrumbBanner />
                 <AuthPanel 
                 user={this.state.currentUser}
                 logout={this.logout}/>
