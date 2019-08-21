@@ -30,7 +30,7 @@ export default class ThumbnailRender extends React.Component {
             <div className="grid-left">
                 {
                 this.props.isLoading ? <div>Loading....</div> :
-                <div>
+                <div className="thumbnail-grid">
                 {
                     this.props.data.map(function(x) {
                         return (
