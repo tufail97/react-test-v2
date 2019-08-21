@@ -8,7 +8,7 @@ export default class PreviewRender extends React.Component {
 
     render() {
         return (
-            <div className="previewOuter">
+            <div>
                 {
                     !this.props.images ? <div>This is where images to be uploaded are displayed (preview before uploading)</div> : 
                     <div>

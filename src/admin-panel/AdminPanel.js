@@ -170,26 +170,27 @@ export default class AdminPanel extends React.Component {
             <div>
                 <div>You are logged in as {this.state.currentUser.username}!</div>
                 <button onClick={this.logout}>Logout</button>
-                    <form className="uploadForm">
-                        <label className="fileInputLabel" htmlFor="fileInput">Select your files here</label>
-                        <input 
-                        id="fileInput"
-                        className="fileInput"
-                        type="file" 
-                        multiple 
-                        onChange={this.onChangeHandler} />
-                    </form>
-                    <PreviewRender 
-                    images={this.state.previewImages} />
-                    <button 
-                    className="uploadButton"
-                    onClick={this.onClickHandler}>
-                    Upload your files
-                    </button>
-                <ThumbnailRender 
-                data={this.state.data} 
-                isLoading={this.state.isLoading} 
-                remove={this.removeChecked}/>
+                        <form className="uploadForm">
+                            <label className="fileInputLabel" htmlFor="fileInput">Select your files here</label>
+                            <input 
+                            id="fileInput"
+                            className="fileInput"
+                            type="file" 
+                            multiple 
+                            onChange={this.onChangeHandler} />
+                        </form>
+                        <PreviewRender 
+                        images={this.state.previewImages} />
+                        <button 
+                        className="uploadButton"
+                        onClick={this.onClickHandler}>
+                        Upload your files
+                        </button>
+                    <ThumbnailRender 
+                    data={this.state.data} 
+                    isLoading={this.state.isLoading} 
+                    remove={this.removeChecked}/>
+
             </div>
         )
     }

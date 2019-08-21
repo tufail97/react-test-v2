@@ -33,7 +33,7 @@ body {
 
 /** Admin Page Styles **/
 
-/* Input button */
+/* Right hand side (upload, preview pane etc.) */
 
 #fileInput {
     display: none;
@@ -42,13 +42,6 @@ body {
 .fileInputLabel {
     padding: 5px;
     border: 1px solid black;
-}
-
-.previewOuter {
-    position: absolute;
-    left:350px;
-    width: 200px;
-    height: 200px;
 }
 
 .prevImage {
@@ -64,8 +57,18 @@ body {
     margin: 20px 0px;
 }
 
-.removeElementsButton {
-    margin: 20px 0px;
+/** current thumbnail styles **/
+
+.thumbnailCurrentContainer {
+    position: relative;
+    width: 45%;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.thumbnailCurrentImage {
+    width: 100%;
 }
 
 /** Header styles **/

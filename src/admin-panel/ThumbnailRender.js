@@ -30,14 +30,14 @@ export default class ThumbnailRender extends React.Component {
             <div>
                 {
                 this.props.isLoading ? <div>Loading....</div> :
-                <div>
+                <div className="thumbnailCurrentContainer">
                 {
                     this.props.data.map(function(x) {
                         return (
                             <div key={x._id}>
                                 <img 
+                                className="thumbnailCurrentImage"
                                 key ={x._id + "a"} 
-                                style={{width:200, height:200}} 
                                 src={`http://localhost:3000/${x.imagePath}`} />
                                 <input 
                                 className='imageCheckboxes' 
