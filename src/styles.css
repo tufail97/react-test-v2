@@ -12,73 +12,11 @@ body {
     width: 85%;
     margin: 0 auto;
 }
-/** Front Page Styles **/
 
-#glitchImagesContainer {
-    width:500px;
-    height:300px;
-    position: absolute;
-    top: 50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-}
 
-.glitchImages {
-    position: absolute;
-    top:0px;
-    left:0px;
-    width:100%;
-    height:100%;
-}
-
-/** Admin Page Styles **/
-
-/* Right hand side (upload, preview pane etc.) */
-
-#fileInput {
-    display: none;
-}
-
-.fileInputLabel {
-    padding: 5px;
-    border: 1px solid black;
-}
-
-.prevImage {
-    width: 100%;
-    height: 100%;
-}
-
-.uploadForm {
-    margin-top: 20px;
-}
-
-.uploadButton {
-    margin: 20px 0px;
-}
-
-/** current thumbnail styles **/
-
-.thumbnailCurrentContainer {
-    position: relative;
-    width: 45%;
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 1fr 1fr;
-}
-
-.thumbnailCurrentImage {
-    width: 100%;
-}
-
-/** current thumbnail styles **/
-
-.prevImage {
-    width: 100px;
-    height: 100px;
-}
-
-/** Header styles **/
+/****************************/
+/** Global Header Styles ***/
+/**************************/
 
 .main-header {
     width: 100%;
@@ -116,3 +54,68 @@ body {
     bottom:0px;
     background-color: black;
 }
+
+/*************************/
+/** Front Page Styles ***/
+/***********************/
+
+#glitchImagesContainer {
+    width:500px;
+    height:300px;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+.glitchImages {
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+}
+
+/************************/
+/** Admin Page Styles **/
+/**********************/
+
+/* Right hand side (upload, preview pane etc.) */
+
+#fileInput {
+    display: none;
+}
+
+.fileInputLabel {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+.prevImage {
+    width: 100px;
+    height: 100px;
+}
+
+.uploadForm {
+    margin-top: 20px;
+}
+
+.uploadButton {
+    margin: 20px 0px;
+}
+
+/** current thumbnail styles **/
+
+.thumbnailCurrentImage {
+    width: 100px;
+    height: 100px;
+}
+
+/* Grid outer */
+
+.grid-outer {
+    display: grid;
+    grid-template-columns: 0.6fr 0.4fr;
+    grid-gap: 5%;
+}
+

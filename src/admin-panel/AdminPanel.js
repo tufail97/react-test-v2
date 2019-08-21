@@ -165,7 +165,6 @@ export default class AdminPanel extends React.Component {
         }
     }
 
-
     render() {
         return (
             <div>
@@ -173,19 +172,24 @@ export default class AdminPanel extends React.Component {
                 user={this.state.currentUser}
                 logout={this.logout}/>
 
-                <UploadForm 
-                onChange={this.onChangeHandler}/>
+                <div className="grid-outer">
+                    <ThumbnailRender 
+                    data={this.state.data} 
+                    isLoading={this.state.isLoading} 
+                    remove={this.removeChecked}/>   
 
-                <PreviewRender 
-                images={this.state.previewImages} />
+                    <div className="grid-right">
+                        <UploadForm 
+                        onChange={this.onChangeHandler}/>
 
-                <UploadButton 
-                clickHandler={this.onClickHandler} />
-  
-                <ThumbnailRender 
-                data={this.state.data} 
-                isLoading={this.state.isLoading} 
-                remove={this.removeChecked}/>
+                        <PreviewRender 
+                        images={this.state.previewImages} />
+
+                        <UploadButton 
+                        clickHandler={this.onClickHandler} />
+                    </div>
+
+                </div>
             </div>
         )
     }
