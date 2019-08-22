@@ -29,13 +29,15 @@ export default class GlobalHeader extends React.Component {
         console.log(this.state);
         return (
             <div className="main-header">
-                {localStorage.length === 1 ? <AuthPanel 
-                logout={this.logout}/> : null
-                }
-                
-                <div className="main-badge-container">
-                    <div className="header-logo"></div>
-                    <div className="main-title">Anxious Film Club</div>
+                <div className="main-header-inner">
+                    {localStorage.length === 1 ? <AuthPanel 
+                    logout={this.logout}/> : null
+                    }
+                    
+                    <div className="main-badge-container">
+                        <div className="header-logo"></div>
+                        <div className="main-title">Anxious Film Club</div>
+                    </div>
                 </div>
                 <div className="header-border"></div>
             </div>

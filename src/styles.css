@@ -24,11 +24,17 @@ body {
     position: relative;
 }
 
+.main-header-inner {
+    position: absolute;
+    width: 94%;
+    height: 100%;
+    left: 3%;
+}
+
 .main-badge-container {
     position: absolute;
     height: 100%;
-    width: 94%;
-    left: 3%;
+    width:100%;
 }
 
 .header-logo {
@@ -44,7 +50,7 @@ body {
     font-size: 2.5em;
     font-weight: bold;
     left: 50px;
-    top: 45px;
+    bottom: 20px;
 }
 
 .header-border {
@@ -55,10 +61,20 @@ body {
     background-color: black;
 }
 
+/* Auth Panel */
+
 .authPanel {
     position: absolute;
     right:0px;
+    bottom: 20px;
     z-index: 2;
+    font-weight: bold;
+    text-align: right;
+    font-size: 1.25em;
+}
+
+.authPanel button {
+    font-size: 0.75em;
 }
 
 /*************************/

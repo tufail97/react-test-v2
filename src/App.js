@@ -28,11 +28,12 @@ class App extends React.Component {
     }
 
     render() {
+        //<GlobalHeader storage={this.state.storage}/>
         console.log(this.state);
         return (
             <Router history={ history }>
             <div>
-                <GlobalHeader storage={this.state.storage}/>
+                <GlobalHeader />
                 <Route exact path="/" component={FrontPage}/>
                 <Route exact path="/login" render={(props) => <LoginPage {...props} pass={this.pass} />} />
                 <PrivateRoute exact path="/admin"component={AdminPanel}/>
