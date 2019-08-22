@@ -1,6 +1,5 @@
 import React from "react";
 import AuthPanel from "./AuthPanel.js";
-import { BehaviorSubject } from 'rxjs';
 
 import { authenticationService } from '../_services/authentication.service.js';
 import { history } from '../_helpers/history.js';
@@ -15,7 +14,6 @@ export default class GlobalHeader extends React.Component {
     }
 
     logout() {
-        console.log(localStorage);
         this.setState({
             loggedIn: false
         })
@@ -25,7 +23,6 @@ export default class GlobalHeader extends React.Component {
 
 
     render() {
-        console.log(this.props);
         return (
             <div className="main-header">
                 <div className="main-header-inner">

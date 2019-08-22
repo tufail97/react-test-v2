@@ -22,25 +22,20 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        console.log(localStorage);
         if (localStorage.length === 1) {
-            var localParse = JSON.parse(localStorage.getItem('currentUser'));
             this.setState({
-                user: localParse.username
+                user: JSON.parse(localStorage.getItem('currentUser')).username
             })
         }
     }
 
     pass(value) {
-        console.log("value", value);
         this.setState({
             loggingIn: true
         })
     }
 
     render() {
-        //<GlobalHeader storage={this.state.storage}/>
-        console.log(this.state);
         return (
             <Router history={ history }>
             <div>

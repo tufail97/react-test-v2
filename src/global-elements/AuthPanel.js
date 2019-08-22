@@ -8,7 +8,7 @@ export default class AuthPanel extends React.Component {
     render() {
         return(
             <div className="authPanel">
-                <div>{this.props.user}</div>
+                <div>{console.log("just before props",this.props)}{this.props.user}</div>
                 <div>Admin</div>
                 <button onClick={this.props.logout}>Logout</button>
             </div>
