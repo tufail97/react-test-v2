@@ -15,18 +15,20 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            storage: 0
+            loggingIn: null
         }
         this.pass = this.pass.bind(this);
     }
 
     pass(value) {
+        console.log("value", value);
         this.setState({
-            storage: value
+            loggingIn: true
         })
     }
 
     render() {
+        console.log(this.state);
         return (
             <Router history={ history }>
             <div>

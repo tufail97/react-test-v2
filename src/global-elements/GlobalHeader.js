@@ -9,34 +9,30 @@ export default class GlobalHeader extends React.Component {
     constructor() {
         super();
         this.state = {
-            headerStorage: 0
+            loggedIn: null
         }
         this.logout = this.logout.bind(this);
     }
 
     logout() {
+        console.log(localStorage);
+        this.setState({
+            loggedIn: false
+        })
         authenticationService.logout();
         history.push('/login');
-        this.setState({
-            headerStorage: 0
-        })
     }
 
-    componentWillMount () {
-        this.setState({
-            headerStorage: 1
-        })
-    }
+
 
     render() {
         console.log(this.state);
         return (
             <div className="main-header">
-                {this.props.storage === 1 || this.state.headerStorage === 1 ?
-                <AuthPanel 
-                loggedOn={this.state.loggedOn}
+                {localStorage.length === 1 ? <AuthPanel 
                 logout={this.logout}/> : null
                 }
+                
                 <div className="main-badge-container">
                     <div className="header-logo"></div>
                     <div className="main-title">Anxious Film Club</div>

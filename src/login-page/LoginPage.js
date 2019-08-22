@@ -51,7 +51,7 @@ export default class LoginPage extends React.Component {
             user => {
                 const { from } = this.props.location.state || { from: { pathname: "/admin" } };
                 this.props.history.push(from);
-                this.props.pass(localStorage.length);
+                this.props.pass(true);
             },
             error => {
                 console.log(this.state);
