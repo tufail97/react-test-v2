@@ -15,14 +15,14 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            loggedIn: null
+            storage: 0
         }
         this.pass = this.pass.bind(this);
     }
 
     pass(value) {
         this.setState({
-            loggedIn: value
+            storage: value
         })
     }
 
@@ -30,7 +30,7 @@ class App extends React.Component {
         return (
             <Router history={ history }>
             <div>
-                <GlobalHeader loggedIn={this.state.loggedIn}/>
+                <GlobalHeader storage={this.state.storage}/>
                 <Route exact path="/" component={FrontPage}/>
                 <Route exact path="/login" render={(props) => <LoginPage {...props} pass={this.pass} />} />
                 <PrivateRoute exact path="/admin"component={AdminPanel}/>

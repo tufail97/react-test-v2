@@ -5,15 +5,11 @@ import { BehaviorSubject } from 'rxjs';
 import { authenticationService } from '../_services/authentication.service.js';
 import { history } from '../_helpers/history.js';
 
-const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
-console.log(currentUserSubject._value);
-
-
 export default class GlobalHeader extends React.Component {
     constructor() {
         super();
         this.state = {
-            loggedOn: currentUserSubject._value
+            headerStorage: 0
         }
         this.logout = this.logout.bind(this);
     }
@@ -22,15 +18,21 @@ export default class GlobalHeader extends React.Component {
         authenticationService.logout();
         history.push('/login');
         this.setState({
-            loggedOn: null
+            headerStorage: 0
+        })
+    }
+
+    componentWillMount () {
+        this.setState({
+            headerStorage: 1
         })
     }
 
     render() {
-        console.log(localStorage);
+        console.log(this.state);
         return (
             <div className="main-header">
-                {this.state.loggedOn || this.props.loggedIn ?
+                {this.props.storage === 1 || this.state.headerStorage === 1 ?
                 <AuthPanel 
                 loggedOn={this.state.loggedOn}
                 logout={this.logout}/> : null
