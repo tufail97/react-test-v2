@@ -23,10 +23,12 @@ class App extends React.Component {
 
     componentDidMount() {
         console.log(localStorage);
-        var localParse = JSON.parse(localStorage.getItem('currentUser'));
-        this.setState({
-            user: localParse.username
-        })
+        if (localStorage.length === 1) {
+            var localParse = JSON.parse(localStorage.getItem('currentUser'));
+            this.setState({
+                user: localParse.username
+            })
+        }
     }
 
     pass(value) {

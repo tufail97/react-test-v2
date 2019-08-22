@@ -23,12 +23,6 @@ export default class GlobalHeader extends React.Component {
         history.push('/login');
     }
 
-    componentDidMount() {
-        var user = JSON.parse(localStorage.getItem('currentUser'));
-        console.log(user);
-    }
-
-
 
     render() {
         console.log(this.props);
