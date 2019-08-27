@@ -23,11 +23,11 @@ export default class GlobalHeader extends React.Component {
 
 
     render() {
+        console.log(localStorage);
         return (
             <div className="main-header">
                 <div className="main-header-inner">
                     {localStorage.length === 1 ? <AuthPanel 
-                    user={this.props.user}
                     logout={this.logout}/> : null
                     }
                     

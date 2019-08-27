@@ -15,21 +15,12 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            loggingIn: null,
-            user: null
+            loggingIn: null
         }
         this.pass = this.pass.bind(this);
     }
 
-    componentDidMount() {
-        if (localStorage.length === 1) {
-            this.setState({
-                user: JSON.parse(localStorage.getItem('currentUser')).username
-            })
-        }
-    }
-
-    pass(value) {
+    pass() {
         this.setState({
             loggingIn: true
         })
@@ -39,7 +30,7 @@ class App extends React.Component {
         return (
             <Router history={ history }>
             <div>
-                <GlobalHeader user={this.state.user}/>
+                <GlobalHeader />
                 <Route exact path="/" component={FrontPage}/>
                 <Route exact path="/login" render={(props) => <LoginPage {...props} pass={this.pass} />} />
                 <PrivateRoute exact path="/admin"component={AdminPanel}/>
