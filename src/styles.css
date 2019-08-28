@@ -73,8 +73,19 @@ body {
     font-size: 1.25em;
 }
 
+.userDisplay {
+    text-transform: capitalize;
+}
+
 .authPanel button {
-    font-size: 0.75em;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    border: none;
+    right: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    transition: opacity 75ms linear;
 }
 
 /*************************/
