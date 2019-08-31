@@ -5,7 +5,6 @@ export default class AuthPanel extends React.Component {
         super();
         this.state = {
             logoutOpacity: 0,
-            logoutVisibility: "hidden",
             logoutPointer: "none",
             logoutMobile: false
         }
@@ -18,7 +17,6 @@ export default class AuthPanel extends React.Component {
         console.log('mouse in');
         this.setState({
             logoutOpacity: 1,
-            logoutVisibility: "visible"
         })
         if (this.state.logoutMobile === false) {
             this.setState({
@@ -31,7 +29,6 @@ export default class AuthPanel extends React.Component {
         console.log('mouse out');
         this.setState({
             logoutOpacity: 0,
-            logoutVisibility: "hidden",
             logoutPointer: "none"
         })
     }
@@ -39,7 +36,6 @@ export default class AuthPanel extends React.Component {
     mouseClick() {
         console.log('clicked');
         this.setState({
-            logoutVisibility: "visible",
             logoutOpacity: 1,
             logoutPointer: "auto",
             logoutMobile: true
@@ -54,7 +50,7 @@ export default class AuthPanel extends React.Component {
                     <div className="userDisplay">{JSON.parse(localStorage.getItem('currentUser')).username}</div>
                     <div className="adminDisplay">Admin</div>
                 </div>
-                <button style={{opacity:this.state.logoutOpacity, visibility:this.state.logoutVisibility,pointerEvents:this.state.logoutPointer}} onClick={this.props.logout}>Logout</button>
+                <button style={{opacity:this.state.logoutOpacity, pointerEvents:this.state.logoutPointer}} onClick={this.props.logout}>Logout</button>
             </div>
         )
     }
