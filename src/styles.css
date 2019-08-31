@@ -25,10 +25,10 @@ body {
 }
 
 .main-header-inner {
-    position: absolute;
+    position: relative;
+    margin: 0 auto;
     width: 94%;
     height: 100%;
-    left: 3%;
 }
 
 .main-badge-container {
@@ -157,7 +157,7 @@ body {
 .grid-outer {
     position: relative;
     width: 94%;
-    left: 3%;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 0.6fr 0.4fr;
     grid-gap: 5%;
@@ -196,4 +196,14 @@ body {
     margin: 0px 7px;
     font-size: 0.7em;
     transform: translate(0,-0.2em);
+}
+
+/************************/
+/** Login Page Styles **/
+/**********************/
+
+.login-outer {
+    position: relative;
+    width: 94%;
+    margin: 0 auto;
 }

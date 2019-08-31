@@ -66,7 +66,7 @@ export default class LoginPage extends React.Component {
 
     render () {
         return (
-           <div>
+           <div className="login-outer">
                <form onSubmit={this.handleSubmit}>
                    <div>
                        <label htmlFor="username">
