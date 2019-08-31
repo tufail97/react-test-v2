@@ -86,6 +86,9 @@ body {
     font-size: inherit;
     font-weight: inherit;
     transition: opacity 75ms linear;
+    background-color: #ffffff;
+    border-bottom: 2px solid black;
+    cursor: pointer;
 }
 
 /*************************/
