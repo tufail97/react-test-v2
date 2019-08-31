@@ -14,7 +14,6 @@ export default class AuthPanel extends React.Component {
     }
 
     mouseEnter() {
-        console.log('mouse in');
         this.setState({
             logoutOpacity: 1,
         })
@@ -26,7 +25,6 @@ export default class AuthPanel extends React.Component {
     }
 
     mouseLeave() {
-        console.log('mouse out');
         this.setState({
             logoutOpacity: 0,
             logoutPointer: "none"
@@ -34,7 +32,6 @@ export default class AuthPanel extends React.Component {
     }
 
     mouseClick() {
-        console.log('clicked');
         this.setState({
             logoutOpacity: 1,
             logoutPointer: "auto",
@@ -43,7 +40,6 @@ export default class AuthPanel extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return(
             <div onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} className="authPanel">
                 <div onClick={this.mouseClick}>
