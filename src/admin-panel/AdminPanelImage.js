@@ -42,7 +42,7 @@ export default class AdminPanelImage extends React.Component {
         var stateCopy = this.state.data;
         for (var j = 0; j < valArray.length; j++) {
             for (var i = 0; i < stateCopy.length; i++) {
-                if (stateCopy[i].imagePath === valArray[j].imageId) {
+                if (stateCopy[i].filePath === valArray[j].imageId) {
                     stateCopy.splice(i,1);
                     break;
                 }

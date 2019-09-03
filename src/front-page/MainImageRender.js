@@ -40,7 +40,7 @@ export default class MainImageRender extends React.Component {
                                 <img 
                                 key={x._id} 
                                 className="glitchImages" 
-                                src={`http://localhost:3000/${x.imagePath}`} />
+                                src={`http://localhost:3000/${x.filePath}`} />
                             )
                         })
                     }

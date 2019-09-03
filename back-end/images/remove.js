@@ -8,8 +8,9 @@ function remove(req,res) {
     var fileToDelete = req.body;
     console.log("this is from req.body",req.body[0].imageId);
       fileToDelete.forEach(function(file) {
+        console.log(file);
       deleteLocalPath(file.imageId);
-      deleteDbEntry('photos', {'imagePath': file.imageId});
+      deleteDbEntry('photos', {'filePath': file.imageId});
       })
     
   };

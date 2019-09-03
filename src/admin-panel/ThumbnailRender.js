@@ -38,12 +38,12 @@ export default class ThumbnailRender extends React.Component {
                                 <img 
                                 className="thumbnailCurrentImage"
                                 key ={x._id + "a"} 
-                                src={`http://localhost:3000/${x.imagePath}`} />
+                                src={`http://localhost:3000/${x.filePath}`} />
                                 <input 
                                 className='imageCheckboxes' 
                                 type='checkbox' 
                                 key={x._id} 
-                                value={x.imagePath}>
+                                value={x.filePath}>
                                 </input>
                             </div>
                         )
