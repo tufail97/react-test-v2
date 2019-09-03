@@ -1,21 +1,23 @@
 var multer = require('multer');
 var shortid = require('shortid');
+var mime = require('mime-types');
 
 //Set Storage
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-
+    //decide which directory upload should go to
     if (file.mimetype.includes('image')) {
       cb(null, 'public/uploads/images');
     } else if (file.mimetype.includes('video')) {
       cb(null, 'public/uploads/videos');
     } else {
+      //should alert that the content type isn't accepted
       console.log('there is an error');
     }
-    console.log(file);
   },
   filename: function (req, file, cb) {
-    cb(null, shortid.generate()); //create filename
+    //create filename: shortid.extension
+    cb(null, shortid.generate() + "." + mime.extension(file.mimetype));
   }
 })
 
@@ -29,20 +31,20 @@ function upload(req, res) {
             fileObject = {
                 originalName: file.originalname,
                 filePath: file.path,
-                size: file.size,
+                fileSize: file.size,
                 contentType: file.mimetype,
                 timeUploaded: Date.now()
             }
-            console.log(fileObject);
             fileInfoArray.push(fileObject);
-            return fileInfoArray;
+            //was a return statement here, don't think it is needed?
         })
-        //console.log(fileInfoArray);
+        console.log(fileInfoArray);
         if (err instanceof multer.MulterError) {
                return res.status(500).json(err)
            } else if (err) {
                return res.status(500).json(err)
            }
+
            db.collection('photos').insertMany(fileInfoArray, function (err, result) {
             if (err) return console.log(err);
             console.log('array saved to database');
