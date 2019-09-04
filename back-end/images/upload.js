@@ -8,50 +8,74 @@ var storage = multer.diskStorage({
     //decide which directory upload should go to
     if (file.mimetype.includes('image')) {
       cb(null, 'public/uploads/images');
-    } else if (file.mimetype.includes('video')) {
+    } 
+    if (file.mimetype.includes('video')) {
       cb(null, 'public/uploads/videos');
-    } else {
-      //should alert that the content type isn't accepted
-      console.log('there is an error');
     }
   },
   filename: function (req, file, cb) {
-    //create filename: shortid.extension
-    console.log(file);
+    //create filename
     cb(null, shortid.generate() + path.extname(file.originalname));
   }
 })
 
-var uploadFile = multer({ storage: storage }).array('file');
+var uploadFile = multer({ 
+  storage: storage,
+  fileFilter: function(req,file,callback) {
+    var ext = path.extname(file.originalname);
+    if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg' && ext !== '.gif' && ext !== '.mp4') {
+      return callback(false, true); //reject if file not supported
+    }
+    callback(null, true);
+  }
+}).array('file');
 
 function upload(req, res) {
-    uploadFile(req, res, function (err) {
-        var fileInfo = req.files;
-        var fileInfoArray = [];
-        fileInfo.map(function(file) {
-            fileObject = {
-                originalName: file.originalname,
-                filePath: file.path,
-                fileSize: file.size,
-                contentType: file.mimetype,
-                timeUploaded: Date.now()
-            }
-            fileInfoArray.push(fileObject);
-            //was a return statement here, don't think it is needed?
-        })
-        console.log(fileInfoArray);
-        if (err instanceof multer.MulterError) {
-               return res.status(500).json(err)
-           } else if (err) {
-               return res.status(500).json(err)
-           }
-
-           db.collection('photos').insertMany(fileInfoArray, function (err, result) {
-            if (err) return console.log(err);
-            console.log('array saved to database');
-            })
-      return res.status(200).send(req.file)
+  uploadFile(req, res, function (err) {
+    var fileInfo = req.files;
+    var imageFileArray = [];
+    var videoFileArray = [];
+    fileInfo.map(function(file) {
+      fileObject = {
+        originalName: file.originalname,
+        filePath: file.path,
+        fileSize: file.size,
+        contentType: file.mimetype,
+        timeUploaded: Date.now()
+      }
+      if (fileObject.contentType.includes('image')) {
+        imageFileArray.push(fileObject);
+      }
+      if (fileObject.contentType.includes('video')) {
+        videoFileArray.push(fileObject);
+      }
     })
+    pushToCollection(imageFileArray, "images");
+    pushToCollection(videoFileArray, "videos");
+    return res.status(200).send(req.file)
+  })
 };
+
+function pushToCollection(fileArray, collection) {
+  if (fileArray.length > 0) {
+    switch(collection) {
+      case "images":
+        insertToCollection('photos', fileArray);
+        break;
+      case "videos":
+        insertToCollection('videos', fileArray);
+        break;
+    }
+  }
+}
+
+function insertToCollection(collectionName, fileArray) {
+  db.collection(collectionName).insertMany(fileArray, function (err, result) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log('array saved to database');
+  })
+}
 
 module.exports = { upload };
