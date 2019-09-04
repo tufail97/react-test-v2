@@ -1,6 +1,6 @@
 var multer = require('multer');
 var shortid = require('shortid');
-var mime = require('mime-types');
+var path = require('path');
 
 //Set Storage
 var storage = multer.diskStorage({
@@ -17,7 +17,8 @@ var storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     //create filename: shortid.extension
-    cb(null, shortid.generate() + "." + mime.extension(file.mimetype));
+    console.log(file);
+    cb(null, shortid.generate() + path.extname(file.originalname));
   }
 })
 
