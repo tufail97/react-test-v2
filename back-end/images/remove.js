@@ -11,6 +11,11 @@ function remove(req,res) {
     }    
   };
 
+  ////
+  ////  Need to tidy up .imageId from form, doesn't make sense/not re-usable
+  ////  Check what req.setTimout does
+  ////
+
   function handleDelete(req, collection) {
     //get the imageId from the checked items when form is posted
     console.log(req.baseUrl);
