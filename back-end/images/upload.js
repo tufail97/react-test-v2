@@ -33,8 +33,7 @@ var uploadFile = multer({
 function upload(req, res) {
   uploadFile(req, res, function (err) {
     var fileInfo = req.files;
-    var imageFileArray = [];
-    var videoFileArray = [];
+    var uploadArray = [];
     fileInfo.map(function(file) {
       fileObject = {
         originalName: file.originalname,
@@ -43,30 +42,35 @@ function upload(req, res) {
         contentType: file.mimetype,
         timeUploaded: Date.now()
       }
-      if (fileObject.contentType.includes('image')) {
-        imageFileArray.push(fileObject);
-      }
-      if (fileObject.contentType.includes('video')) {
-        videoFileArray.push(fileObject);
-      }
+      uploadArray.push(fileObject);
     })
-    pushToCollection(imageFileArray, "images");
-    pushToCollection(videoFileArray, "videos");
+    filterUploadArray(uploadArray);
     return res.status(200).send(req.file)
   })
 };
 
-function pushToCollection(fileArray, collection) {
-  if (fileArray.length > 0) {
-    switch(collection) {
-      case "images":
-        insertToCollection('photos', fileArray);
-        break;
-      case "videos":
-        insertToCollection('videos', fileArray);
-        break;
+function filterUploadArray(fileArray) {
+  var arrayObject = {
+    images: [],
+    videos: []
+  };
+  fileArray.map(function(file) {
+    if (file.contentType.includes("image")) {
+      arrayObject.images.push(file);
     }
-  }
+    if (file.contentType.includes("video")) {
+      arrayObject.videos.push(file);
+    }
+  })
+  pushToCollection(arrayObject);
+}
+
+function pushToCollection(arrayObject) {
+  Object.keys(arrayObject).map(function(objectKey) {
+    if(arrayObject[objectKey].length > 0) {
+      insertToCollection(objectKey, arrayObject[objectKey]);  //ensure collection name is same as object key
+    }
+  })
 }
 
 function insertToCollection(collectionName, fileArray) {

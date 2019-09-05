@@ -1,19 +1,28 @@
 var fs = require('fs');
 
-module.exports = { remove };
-
 function remove(req,res) {
+    switch (req.baseUrl) {
+      case "/images":
+        handleDelete(req, "images");
+        break;
+      case "/videos":
+        handleDelete(req, "videos");
+        break;
+    }    
+  };
+
+  function handleDelete(req, collection) {
     //get the imageId from the checked items when form is posted
+    console.log(req.baseUrl);
     req.setTimeout(0);
     var fileToDelete = req.body;
     console.log("this is from req.body",req.body[0].imageId);
       fileToDelete.forEach(function(file) {
         console.log(file);
       deleteLocalPath(file.imageId);
-      deleteDbEntry('photos', {'filePath': file.imageId});
+      deleteDbEntry(collection, {'filePath': file.imageId});
       })
-    
-  };
+  }
   
   //function to delete image locally using path
   function deleteLocalPath(fileToDelete) {
@@ -37,3 +46,5 @@ function remove(req,res) {
       }
     })
   }
+
+  module.exports = { remove };
