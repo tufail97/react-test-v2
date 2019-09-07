@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import AdminPanel from "./admin-panel/AdminPanel.js";
+import AdminPage from "./admin-page/AdminPage.js";
 import FrontPage from "./front-page/FrontPage.js";
 import LoginPage from "./login-page/LoginPage.js";
 import GlobalHeader from "./global-elements/GlobalHeader.js";
@@ -33,7 +33,7 @@ class App extends React.Component {
                 <GlobalHeader />
                 <Route exact path="/" component={FrontPage}/>
                 <Route exact path="/login" render={(props) => <LoginPage {...props} pass={this.pass} />} />
-                <PrivateRoute exact path="/admin"component={AdminPanel}/>
+                <PrivateRoute exact path="/admin"component={AdminPage}/>
             </div>
             </Router>
         )

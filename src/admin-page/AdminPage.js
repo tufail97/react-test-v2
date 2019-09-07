@@ -7,7 +7,7 @@ import BreadcrumbBanner from './BreadcrumbBanner.js';
 import AdminPanelImage from './AdminPanelImage.js';
 import AdminPanelVideo from './AdminPanelVideo.js';
 
-export default class AdminPanel extends React.Component {
+export default class AdminPage extends React.Component {
     constructor() {
         super();
         this.state = {
