@@ -62,10 +62,10 @@ function filterUploadArray(fileArray) {
       arrayObject.videos.push(file);
     }
   })
-  pushToCollection(arrayObject);
+  specifyCollection(arrayObject);
 }
 
-function pushToCollection(arrayObject) {
+function specifyCollection(arrayObject) {
   Object.keys(arrayObject).map(function(objectKey) {
     if(arrayObject[objectKey].length > 0) {
       insertToCollection(objectKey, arrayObject[objectKey]);  //ensure collection name is same as object key
