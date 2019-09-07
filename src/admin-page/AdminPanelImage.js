@@ -1,10 +1,10 @@
 import React from 'react';
 import Axios from 'axios';
 
-import ThumbnailRender from "./ThumbnailRender.js";
-import PreviewRender from "./PreviewRender.js";
-import UploadForm from "./UploadForm.js";
-import UploadButton from "./UploadButton.js";
+import ThumbnailRender from "./content/ThumbnailRender.js";
+import PreviewRender from "./upload/PreviewRender.js";
+import UploadForm from "./upload/UploadForm.js";
+import UploadButton from "./upload/UploadButton.js";
 
 export default class AdminPanelImage extends React.Component {
     constructor() {
