@@ -26,7 +26,6 @@ export default class AdminPanelImage extends React.Component {
         this.getData();
     }
 
-    //*************
     removeChecked(valArray) {
         var headerInfo = {
             headers: {'Authorization': "bearer " + this.props.currentUser.token}

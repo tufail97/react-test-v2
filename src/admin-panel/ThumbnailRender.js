@@ -11,7 +11,6 @@ export default class ThumbnailRender extends React.Component {
         this.getChecked = this.getChecked.bind(this);
     }
 
-    //*************
     getChecked() {
         var imageCheckboxes = document.querySelectorAll('.imageCheckboxes');
         var checkedVals = [];

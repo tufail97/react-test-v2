@@ -11,7 +11,6 @@ function remove(req,res) {
     }    
   };
 
-  //*************
   function handleDelete(req, collection) {
     //get the imageId from the checked items when form is posted
     req.body.forEach(function(file) {
