@@ -39,7 +39,7 @@ export default class ThumbnailRender extends React.Component {
         .catch(function (error) {
           console.log(error);
         });
-        var stateCopy = this.props.data;
+        var stateCopy = this.props.imageData;
         console.log('this is statecopy', stateCopy);
         for (var j = 0; j < valArray.length; j++) {
             for (var i = 0; i < stateCopy.length; i++) {
@@ -50,9 +50,9 @@ export default class ThumbnailRender extends React.Component {
                 }
             }
         }
-        this.handleState('data', stateCopy);
+        this.handleState('imageData', stateCopy);
         this.handleState('isLoading', false);
-        console.log(this.props.data);
+        console.log(this.props.imageData);
     }
 
     handleState(state, value) {
@@ -66,7 +66,7 @@ export default class ThumbnailRender extends React.Component {
                 this.props.isLoading ? <div>Loading....</div> :
                 <div className="thumbnail-grid">
                 {
-                    this.props.data.map(function(x) {
+                    this.props.imageData.map(function(x) {
                         return (
                             <div key={x._id}>
                                 <img 
