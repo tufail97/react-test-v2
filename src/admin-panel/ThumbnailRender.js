@@ -11,17 +11,19 @@ export default class ThumbnailRender extends React.Component {
         this.getChecked = this.getChecked.bind(this);
     }
 
+    //*************
     getChecked() {
         var imageCheckboxes = document.querySelectorAll('.imageCheckboxes');
         var checkedVals = [];
         imageCheckboxes.forEach(function(checkbox) {
           if (checkbox.checked) {
-            checkedVals.push({imageId: checkbox.value});
+            checkedVals.push({
+                localPath: checkbox.dataset.filePath, 
+                objectId:checkbox.dataset.objectId
+            });
           }
         })
         this.setState({checkBoxes: checkedVals})
-        console.log(checkedVals);
-        console.log(this.state);
         this.props.remove(checkedVals);
     }
 
@@ -42,8 +44,9 @@ export default class ThumbnailRender extends React.Component {
                                 <input 
                                 className='imageCheckboxes' 
                                 type='checkbox' 
-                                key={x._id} 
-                                value={x.filePath}>
+                                key={x._id + "b"} 
+                                data-object-id={x._id}
+                                data-file-path={x.filePath}>
                                 </input>
                             </div>
                         )

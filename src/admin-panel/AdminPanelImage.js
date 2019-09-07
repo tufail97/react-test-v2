@@ -26,11 +26,11 @@ export default class AdminPanelImage extends React.Component {
         this.getData();
     }
 
+    //*************
     removeChecked(valArray) {
         var headerInfo = {
             headers: {'Authorization': "bearer " + this.props.currentUser.token}
         }
-        var {data, isLoading} = this.state;
         this.setState({isLoading: true});
         console.log(this.state.data);
         Axios.post("http://localhost:3000/images/remove", valArray, headerInfo)
@@ -40,9 +40,11 @@ export default class AdminPanelImage extends React.Component {
           console.log(error);
         });
         var stateCopy = this.state.data;
+        console.log('this is statecopy', stateCopy);
         for (var j = 0; j < valArray.length; j++) {
             for (var i = 0; i < stateCopy.length; i++) {
-                if (stateCopy[i].filePath === valArray[j].imageId) {
+                if (stateCopy[i]._id === valArray[j].objectId) {
+                    console.log(stateCopy[i]._id, valArray[j].objectId)
                     stateCopy.splice(i,1);
                     break;
                 }

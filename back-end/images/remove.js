@@ -11,22 +11,14 @@ function remove(req,res) {
     }    
   };
 
-  ////
-  ////  Need to tidy up .imageId from form, doesn't make sense/not re-usable
-  ////  Check what req.setTimout does
-  ////
-
+  //*************
   function handleDelete(req, collection) {
     //get the imageId from the checked items when form is posted
-    console.log(req.baseUrl);
-    req.setTimeout(0);
-    var fileToDelete = req.body;
-    console.log("this is from req.body",req.body[0].imageId);
-      fileToDelete.forEach(function(file) {
-        console.log(file);
-      deleteLocalPath(file.imageId);
-      deleteDbEntry(collection, {'filePath': file.imageId});
-      })
+    req.body.forEach(function(file) {
+      console.log(file);
+      deleteLocalPath(file.localPath);
+      deleteDbEntry(collection, {_id : ObjectId(file.objectId)});
+    })
   }
   
   //function to delete image locally using path
