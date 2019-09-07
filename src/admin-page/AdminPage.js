@@ -36,7 +36,7 @@ export default class AdminPage extends React.Component {
         authenticationService.currentUser.subscribe(x => this.setState({ currentUser: x }));
     }
 
-    ////////
+    //////// Thumbnail Render
 
     removeChecked(valArray) {
         var headerInfo = {
@@ -65,7 +65,9 @@ export default class AdminPage extends React.Component {
         console.log(this.state.data);
     }
 
-     getData() {
+    ////////// upload
+
+    getData() {
         Axios.get('http://localhost:3000/images/retreive')
         .then(res => {
             var objArray = res.data;
@@ -83,6 +85,38 @@ export default class AdminPage extends React.Component {
         })
         this.getPreviewImages(e.target.files);
     }
+
+    onClickHandler(e) {
+        var headerInfo = {
+            headers: {'Authorization': "bearer " + this.state.currentUser.token}
+        }
+        console.log(this.props.currentUser);
+        if (this.state.selectedFile) {
+            var {data, isLoading} = this.state;
+            this.setState({isLoading: true});
+            console.log(this.state.data);
+            var formData = new FormData();
+            for (let i = 0; i < this.state.selectedFile.length; i++) {
+                formData.append('file', this.state.selectedFile[i]);
+            }
+            Axios.post("http://localhost:3000/images/upload", formData, headerInfo
+            )
+            .then(res => {
+                Axios.get('http://localhost:3000/images/retreive')
+                .then(res => {
+                    this.setState({data: res.data, isLoading: false});
+                })
+            })
+            document.querySelector('.fileInput').value = null;
+            this.setState({
+                selectedFile: null,
+                previewImages: null
+            });
+        } else {
+            console.log('insert error warning');
+        }
+    }
+
 
     getPreviewImages(files) {
         var previewImagesArray = [];
@@ -133,37 +167,6 @@ export default class AdminPage extends React.Component {
         })
     }
 
-    onClickHandler(e) {
-        var headerInfo = {
-            headers: {'Authorization': "bearer " + this.state.currentUser.token}
-        }
-        console.log(this.props.currentUser);
-        if (this.state.selectedFile) {
-            var {data, isLoading} = this.state;
-            this.setState({isLoading: true});
-            console.log(this.state.data);
-            var data = new FormData();
-            for (let i = 0; i < this.state.selectedFile.length; i++) {
-                data.append('file', this.state.selectedFile[i]);
-            }
-            Axios.post("http://localhost:3000/images/upload", data, headerInfo
-            )
-            .then(res => {
-                Axios.get('http://localhost:3000/images/retreive')
-                .then(res => {
-                    this.setState({data: res.data, isLoading: false});
-                })
-              })
-            document.querySelector('.fileInput').value = null;
-            this.setState({
-                selectedFile: null,
-                previewImages: null
-            });
-        } else {
-            console.log('insert error warning');
-        }
-    }
-
     //////////
 
     displayDecision(type) {
@@ -182,19 +185,19 @@ export default class AdminPage extends React.Component {
             <div>
                 <BreadcrumbBanner />
                 <div className="grid-outer">
-                { this.displayDecision(this.state.display) }
+                    { this.displayDecision(this.state.display) }
 
-                <div className="grid-right">
-                    <UploadForm 
-                    onChange={this.onChangeHandler}/>
+                    <div className="grid-right">
+                        <UploadForm 
+                        onChange={this.onChangeHandler}/>
 
-                    <PreviewRender 
-                    images={this.state.previewImages} />
+                        <PreviewRender 
+                        images={this.state.previewImages} />
 
-                    <UploadButton 
-                    clickHandler={this.onClickHandler} />
+                        <UploadButton 
+                        clickHandler={this.onClickHandler} />
+                    </div>
                 </div>
-            </div>
             </div>
         )
     }
