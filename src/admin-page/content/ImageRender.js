@@ -1,8 +1,9 @@
 import React from 'react';
-import ElementDeleteButton from "./ElementDeleteButton.js";
 import Axios from 'axios';
 
-export default class ThumbnailRender extends React.Component {
+import ElementDeleteButton from "./ElementDeleteButton.js";
+
+export default class ImageRender extends React.Component {
     constructor() {
         super();
         this.state = {

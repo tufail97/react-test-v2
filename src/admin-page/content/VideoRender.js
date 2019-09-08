@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class AdminPanelVideo extends React.Component {
+export default class VideoRender extends React.Component {
     constructor() {
         super();
     }

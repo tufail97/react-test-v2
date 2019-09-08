@@ -1,9 +1,9 @@
 import React from 'react';
 import Axios from 'axios';
 
-import ThumbnailRender from "./content/ThumbnailRender.js";
+import ImageRender from "./content/ImageRender.js";
 import BreadcrumbBanner from './BreadcrumbBanner.js';
-import AdminPanelVideo from './AdminPanelVideo.js';
+import VideoRender from './content/VideoRender.js';
 import UploadPanel from './upload/UploadPanel.js';
 
 import { authenticationService } from '../_services/authentication.service.js';
@@ -49,13 +49,13 @@ export default class AdminPage extends React.Component {
     }
 
     displayDecision(type) {
-        return type === "image" ? <ThumbnailRender 
+        return type === "image" ? <ImageRender 
         passUpState={this.changeState}
         imageData={this.state.imageData} 
         isLoading={this.state.isLoading} 
         currentUser={this.state.currentUser} 
         users={this.state.users}/> 
-        : type === "video" ? <AdminPanelVideo />
+        : type === "video" ? <VideoRender />
         : ""
     }
 
