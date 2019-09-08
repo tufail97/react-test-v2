@@ -15,9 +15,9 @@ export default class ImageRender extends React.Component {
     }
 
     getChecked() {
-        var imageCheckboxes = document.querySelectorAll('.imageCheckboxes');
+        var fileCheckboxes = document.querySelectorAll('.fileCheckboxes');
         var checkedVals = [];
-        imageCheckboxes.forEach(function(checkbox) {
+        fileCheckboxes.forEach(function(checkbox) {
           if (checkbox.checked) {
             checkedVals.push({
                 localPath: checkbox.dataset.filePath, 
@@ -75,7 +75,7 @@ export default class ImageRender extends React.Component {
                                 key ={x._id + "a"} 
                                 src={`http://localhost:3000/${x.filePath}`} />
                                 <input 
-                                className='imageCheckboxes' 
+                                className='fileCheckboxes' 
                                 type='checkbox' 
                                 key={x._id + "b"} 
                                 data-object-id={x._id}
