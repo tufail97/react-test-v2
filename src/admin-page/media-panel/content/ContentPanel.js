@@ -9,7 +9,6 @@ export default class ContentPanel extends React.Component {
         this.state = {
             display: "image"
         }
-        this.test = this.test.bind(this);
     }
 
     // displayDecision(type) {
