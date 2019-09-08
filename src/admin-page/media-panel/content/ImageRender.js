@@ -9,9 +9,9 @@ export default class ImageRender extends React.Component {
         this.state = {
             checkBoxes: null
         }
-        this.getChecked = this.getChecked.bind(this);
         this.handleState = this.handleState.bind(this);
         this.removeChecked = this.removeChecked.bind(this);
+        this.getChecked = this.getChecked.bind(this);
     }
 
     getChecked() {

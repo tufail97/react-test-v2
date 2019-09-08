@@ -1,15 +1,13 @@
 import React from 'react';
 import Axios from 'axios';
 
-import VideoRender from './media-panel/content/VideoRender.js';
+import ContentPanel from './media-panel/content/ContentPanel.js';
 import UploadPanel from './media-panel/upload/UploadPanel.js';
-import ImageRender from "./media-panel/content/ImageRender.js";
 
 export default class MediaPanel extends React.Component {
     constructor() {
         super();
         this.state = {
-            display: "image",
             isLoading: true,
             imageData: []
         }
@@ -17,9 +15,20 @@ export default class MediaPanel extends React.Component {
     }
 
     componentDidMount() {
-        this.getData();
+        this.getData('http://localhost:3000/images/retreive', 'imageData');
     }
 
+    getData(endPoint, stateToSet) {
+        Axios.get(endPoint)
+        .then(res => {
+            var objArray = res.data;
+            this.setState({
+                [stateToSet]: objArray,
+                isLoading: false
+            });
+        })
+        .catch(error => this.setState({ error, isLoading: false }));
+    }
 
     changeState(state, newVal) {
         console.log('in changeState');
@@ -29,35 +38,16 @@ export default class MediaPanel extends React.Component {
         console.log(this.state);
     }
 
-    getData() {
-        Axios.get('http://localhost:3000/images/retreive')
-        .then(res => {
-            var objArray = res.data;
-            this.setState({
-                imageData: objArray,
-                isLoading: false
-            });
-        })
-        .catch(error => this.setState({ error, isLoading: false }));
-    }
-
-    displayDecision(type) {
-        return type === "image" ? <ImageRender 
-        passUpState={this.changeState}
-        imageData={this.state.imageData} 
-        isLoading={this.state.isLoading} 
-        currentUser={this.props.currentUser} 
-        users={this.props.users}/> 
-        : type === "video" ? <VideoRender />
-        : ""
-    }
-
     render() {
         return(
             <div>
                 <div className="grid-outer">
-                {/* <ContentPanel /> */}
-                    { this.displayDecision(this.state.display) }
+                <ContentPanel 
+                passUpState={this.changeState}
+                imageData={this.state.imageData} 
+                isLoading={this.state.isLoading} 
+                currentUser={this.props.currentUser}
+                users={this.props.users} />
                
                     <div className="grid-right">
                         <UploadPanel 
