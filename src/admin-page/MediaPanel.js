@@ -1,13 +1,15 @@
 import React from 'react';
 import Axios from 'axios';
 
-import ContentPanel from './media-panel/content/ContentPanel.js';
 import UploadPanel from './media-panel/upload/UploadPanel.js';
+import ImageRender from "./media-panel/content/ImageRender.js";
+import VideoRender from './media-panel/content/VideoRender.js';
 
 export default class MediaPanel extends React.Component {
     constructor() {
         super();
         this.state = {
+            display: "image",
             isLoading: true,
             imageData: []
         }
@@ -38,16 +40,28 @@ export default class MediaPanel extends React.Component {
         console.log(this.state);
     }
 
+    //     displayDecision(type) {
+    //     return type === "image" ? <ImageRender 
+    //     passUpState={this.changeState}
+    //     imageData={this.state.imageData} 
+    //     isLoading={this.state.isLoading} 
+    //     currentUser={this.props.currentUser} 
+    //     users={this.props.users}/> 
+    //     : type === "video" ? <VideoRender />
+    //     : ""
+    // }
+
     render() {
         return(
             <div>
                 <div className="grid-outer">
-                <ContentPanel 
-                passUpState={this.changeState}
-                imageData={this.state.imageData} 
-                isLoading={this.state.isLoading} 
+                <ImageRender 
+                imageData={this.state.imageData}
                 currentUser={this.props.currentUser}
-                users={this.props.users} />
+                users={this.props.users}
+                passUpState={this.changeState}
+                />
+                {/* <VideoRender /> */}
                
                     <div className="grid-right">
                         <UploadPanel 
