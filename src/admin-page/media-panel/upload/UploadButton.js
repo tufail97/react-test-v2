@@ -1,15 +1,15 @@
 import React from "react";
 
-export default class UploadButton extends React.Component {
-    render() {
-        return (
-            <div>
-                <button 
-                className="uploadButton"
-                onClick={this.props.clickHandler}>
-                Upload your files
-                </button>
-            </div>
-        )
-    }
+function UploadButton(props) {
+    return (
+        <div>
+            <button 
+            className="uploadButton"
+            onClick={props.clickHandler}>
+            Upload your files
+            </button>
+        </div>
+    )
 }
+
+export default UploadButton;
