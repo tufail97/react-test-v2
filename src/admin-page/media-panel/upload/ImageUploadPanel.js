@@ -1,11 +1,11 @@
 import React from 'react';
 import Axios from 'axios';
 
-import PreviewRender from "./PreviewRender.js";
+import ImagePreviewRender from "./ImagePreviewRender.js";
 import UploadForm from "./UploadForm.js";
 import UploadButton from "./UploadButton.js";
 
-export default class UploadPanel extends React.Component {
+export default class ImageUploadPanel extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -114,7 +114,7 @@ export default class UploadPanel extends React.Component {
                 <UploadForm 
                 onChange={this.onChangeHandler}/>
 
-                <PreviewRender 
+                <ImagePreviewRender 
                 images={this.state.previewImages} />
 
                 <UploadButton 

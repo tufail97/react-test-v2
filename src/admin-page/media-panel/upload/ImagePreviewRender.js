@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PreviewRender(props) {
+function ImagePreviewRender(props) {
     return (
         <div>
             {
@@ -30,4 +30,4 @@ function PreviewRender(props) {
     )
 }
 
-export default PreviewRender;
+export default ImagePreviewRender;
