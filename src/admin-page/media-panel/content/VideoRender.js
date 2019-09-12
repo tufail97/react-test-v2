@@ -1,7 +1,8 @@
 import React from 'react';
 import Axios from 'axios';
 
-import ElementDeleteButton from './ElementDeleteButton.js'
+import ElementDeleteButton from './ElementDeleteButton.js';
+import FileCheckbox from './FileCheckbox.js';
 
 export default class VideoRender extends React.Component {
     constructor() {
@@ -76,13 +77,8 @@ export default class VideoRender extends React.Component {
                                 key ={x._id + "a"} 
                                 src={`http://localhost:3000/${x.filePath}`}>
                                 </video>
-                                <input 
-                                className='fileCheckboxes' 
-                                type='checkbox' 
-                                key={x._id + "b"} 
-                                data-object-id={x._id}
-                                data-file-path={x.filePath}>
-                                </input>
+                                <FileCheckbox 
+                                fileData={x}/>
                             </div>
                         )
                     })
