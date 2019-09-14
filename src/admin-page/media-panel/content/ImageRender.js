@@ -3,6 +3,7 @@ import Axios from 'axios';
 
 import ElementDeleteButton from "./ElementDeleteButton.js";
 import FileCheckbox from './FileCheckbox.js';
+import HandleState from './HandleState.js';
 
 const ImageRender = (props) => {
     const [checkBoxes, setCheckBoxes] = useState(null);
@@ -26,7 +27,7 @@ const ImageRender = (props) => {
         var headerInfo = {
             headers: {'Authorization': "bearer " + props.currentUser.token}
         }
-        handleState('isLoading', true);
+        HandleState('isLoading', true, props.passUpState);
         Axios.post("http://localhost:3000/images/remove", valArray, headerInfo)
         .then(res => {
         })
@@ -44,13 +45,9 @@ const ImageRender = (props) => {
                 }
             }
         }
-        handleState('imageData', stateCopy);
-        handleState('isLoading', false);
+        HandleState('imageData', stateCopy, props.passUpState);
+        HandleState('isLoading', false, props.passUpState);
         console.log(props.imageData);
-    }
-
-    const handleState = (state, value) => {
-        props.passUpState(state, value);
     }
 
     return (
