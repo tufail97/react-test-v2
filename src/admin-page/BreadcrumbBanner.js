@@ -1,6 +1,6 @@
 import React from "react";
 
-function BreadcrumbBanner() {
+const BreadcrumbBanner = () => {
     return(
         <div className="breadcrumbContainer">
             <div className="breadcrumbCopyContainer">

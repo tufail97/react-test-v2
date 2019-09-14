@@ -1,6 +1,6 @@
 import React from 'react';
 
-function VideoPreviewRender(props) {
+const VideoPreviewRender = (props) => {
     return (
         <div>
             {

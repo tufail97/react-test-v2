@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ImagePreviewRender(props) {
+const ImagePreviewRender = (props) => {
     return (
         <div>
             {

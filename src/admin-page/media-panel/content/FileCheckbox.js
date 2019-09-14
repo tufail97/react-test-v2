@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FileCheckbox(props) {
+const FileCheckbox = (props) => {
     console.log(props);
     return (
         <input 

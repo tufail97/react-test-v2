@@ -1,13 +1,11 @@
 import React from "react";
 import MainImageRender from "./MainImageRender.js";
-
-export default class FrontPage extends React.Component {
- 
-    render () {
+const FrontPage = () => {
         return (
             <div>
                 <MainImageRender />
             </div>
         )
-    }
 }
+
+export default FrontPage;

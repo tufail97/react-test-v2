@@ -1,6 +1,6 @@
 import React from "react";
 
-function UploadForm(props) {
+const UploadForm = (props) => {
     return (
         <div>
             <form className="uploadForm">
