@@ -1,21 +1,13 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Axios from 'axios';
 
 import ElementDeleteButton from "./ElementDeleteButton.js";
 import FileCheckbox from './FileCheckbox.js';
 
-export default class ImageRender extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            checkBoxes: null
-        }
-        this.handleState = this.handleState.bind(this);
-        this.removeChecked = this.removeChecked.bind(this);
-        this.getChecked = this.getChecked.bind(this);
-    }
+const ImageRender = (props) => {
+    const [checkBoxes, setCheckBoxes] = useState(null);
 
-    getChecked() {
+    const getChecked = () => {
         var fileCheckboxes = document.querySelectorAll('.fileCheckboxes');
         var checkedVals = [];
         fileCheckboxes.forEach(function(checkbox) {
@@ -26,22 +18,22 @@ export default class ImageRender extends React.Component {
             });
           }
         })
-        this.setState({checkBoxes: checkedVals})
-        this.removeChecked(checkedVals);
+        setCheckBoxes(checkedVals);
+        removeChecked(checkedVals);
     }
 
-    removeChecked(valArray) {
+    const removeChecked = (valArray) => {
         var headerInfo = {
-            headers: {'Authorization': "bearer " + this.props.currentUser.token}
+            headers: {'Authorization': "bearer " + props.currentUser.token}
         }
-        this.handleState('isLoading', true);
+        handleState('isLoading', true);
         Axios.post("http://localhost:3000/images/remove", valArray, headerInfo)
         .then(res => {
         })
         .catch(function (error) {
           console.log(error);
         });
-        var stateCopy = this.props.imageData;
+        var stateCopy = props.imageData;
         console.log('this is statecopy', stateCopy);
         for (var j = 0; j < valArray.length; j++) {
             for (var i = 0; i < stateCopy.length; i++) {
@@ -52,40 +44,40 @@ export default class ImageRender extends React.Component {
                 }
             }
         }
-        this.handleState('imageData', stateCopy);
-        this.handleState('isLoading', false);
-        console.log(this.props.imageData);
+        handleState('imageData', stateCopy);
+        handleState('isLoading', false);
+        console.log(props.imageData);
     }
 
-    handleState(state, value) {
-        this.props.passUpState(state, value);
+    const handleState = (state, value) => {
+        props.passUpState(state, value);
     }
 
-    render() {
-        return (
-            <div className="grid-left">
-                {
-                this.props.isLoading ? <div>Loading....</div> :
-                <div className="thumbnail-grid">
-                {
-                    this.props.imageData.map(function(x) {
-                        return (
-                            <div key={x._id}>
-                                <img 
-                                className="thumbnailCurrentImage"
-                                key ={x._id + "a"} 
-                                src={`http://localhost:3000/${x.filePath}`} />
-                                <FileCheckbox 
-                                fileData={x}/>
-                            </div>
-                        )
-                    })
-                }
-                </div>
-                }
-               <ElementDeleteButton 
-               getCheckBoxes={this.getChecked}/>
+    return (
+        <div className="grid-left">
+            {
+            props.isLoading ? <div>Loading....</div> :
+            <div className="thumbnail-grid">
+            {
+                props.imageData.map(function(x) {
+                    return (
+                        <div key={x._id}>
+                            <img 
+                            className="thumbnailCurrentImage"
+                            key ={x._id + "a"} 
+                            src={`http://localhost:3000/${x.filePath}`} />
+                            <FileCheckbox 
+                            fileData={x}/>
+                        </div>
+                    )
+                })
+            }
             </div>
-        )
-    }
+            }
+            <ElementDeleteButton 
+            getCheckBoxes={getChecked}/>
+        </div>
+    )
 }
+
+export default ImageRender;
