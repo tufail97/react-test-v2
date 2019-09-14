@@ -10,7 +10,7 @@ export default class MediaPanel extends React.Component {
     constructor() {
         super();
         this.state = {
-            display: "video",
+            display: "image",
             isLoading: true,
             imageData: [],
             videoData: []
